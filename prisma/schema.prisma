@@ -37,6 +37,7 @@ model Product {
   price       Int
   description String
   featured    Boolean          @default(false)
+  onSale      Boolean          @default(false)
   teamId      String
   team        Team             @relation(fields: [teamId], references: [id])
   variants    ProductVariant[]
