@@ -4,14 +4,14 @@
   --background: #fbf9f3;
   --foreground: #0d1414;
 
-  /* Brand: turf teal */
-  --color-brand-50: #eaf4f2;
-  --color-brand-100: #cde6e2;
-  --color-brand-300: #6ba8a1;
-  --color-brand-500: #1f6e68;
-  --color-brand-600: #1a5d58;
-  --color-brand-700: #154c48;
-  --color-brand-900: #0d2f2c;
+  /* Brand: matched to the real Blitz Jerseys logo's teal */
+  --color-brand-50: #ebfaf7;
+  --color-brand-100: #cff2ed;
+  --color-brand-300: #72daca;
+  --color-brand-500: #1c695d;
+  --color-brand-600: #18594f;
+  --color-brand-700: #134941;
+  --color-brand-900: #0c2c27;
 
   /* Floodlight gold (CTA / signature glow) */
   --color-accent-300: #ffe4a3;

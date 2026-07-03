@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { prisma } from "@/lib/prisma";
 import { NavbarClient } from "./navbar-client";
 
@@ -11,8 +12,15 @@ export async function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-surface/95 backdrop-blur supports-[backdrop-filter]:bg-surface/80">
       <div className="container-page relative flex h-16 items-center justify-between md:h-20">
-        <Link href="/" className="font-display text-xl font-bold tracking-tight text-ink-900 md:text-2xl">
-          BLITZ<span className="text-brand-500">JERSEYS</span>
+        <Link href="/" className="flex items-center" aria-label="Blitz Jerseys home">
+          <Image
+            src="/images/brand/logo-color.png"
+            alt="Blitz Jerseys"
+            width={405}
+            height={200}
+            priority
+            className="h-8 w-auto md:h-10"
+          />
         </Link>
 
         <nav className="hidden items-center gap-7 md:flex">

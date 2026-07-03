@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { MessageCircle } from "lucide-react";
 import {
   FacebookIcon,
@@ -21,9 +22,13 @@ export function Footer() {
     <footer className="border-t border-border bg-ink-900 text-white">
       <div className="container-page grid gap-10 py-14 md:grid-cols-4">
         <div className="md:col-span-2">
-          <p className="font-display text-xl font-bold tracking-tight">
-            BLITZ<span className="text-brand-300">JERSEYS</span>
-          </p>
+          <Image
+            src="/images/brand/logo-light.png"
+            alt="Blitz Jerseys"
+            width={405}
+            height={200}
+            className="h-9 w-auto"
+          />
           <p className="mt-3 max-w-sm text-sm text-white/70">
             Performance football shirts inspired by the biggest clubs in the
             Premier League, Serie A, and LaLiga. Built for match day, worn on
