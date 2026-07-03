@@ -1,0 +1,84 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model League {
+  id      String @id @default(cuid())
+  slug    String @unique
+  name    String
+  country String
+  teams   Team[]
+}
+
+model Team {
+  id             String    @id @default(cuid())
+  slug           String    @unique
+  name           String
+  shortName      String
+  primaryColor   String
+  secondaryColor String
+  leagueId       String
+  league         League    @relation(fields: [leagueId], references: [id])
+  products       Product[]
+}
+
+model Product {
+  id          String           @id @default(cuid())
+  slug        String           @unique
+  name        String
+  kitType     String
+  season      String
+  price       Int
+  description String
+  featured    Boolean          @default(false)
+  teamId      String
+  team        Team             @relation(fields: [teamId], references: [id])
+  variants    ProductVariant[]
+  createdAt   DateTime         @default(now())
+}
+
+model ProductVariant {
+  id         String      @id @default(cuid())
+  size       String
+  stock      Int
+  productId  String
+  product    Product     @relation(fields: [productId], references: [id])
+  orderItems OrderItem[]
+
+  @@unique([productId, size])
+}
+
+model Order {
+  id           String      @id @default(cuid())
+  orderNumber  String      @unique
+  customerName String
+  phone        String
+  whatsapp     String
+  address      String
+  city         String
+  notes        String?
+  status       String      @default("pending")
+  total        Int
+  items        OrderItem[]
+  createdAt    DateTime    @default(now())
+}
+
+model OrderItem {
+  id          String         @id @default(cuid())
+  orderId     String
+  order       Order          @relation(fields: [orderId], references: [id])
+  variantId   String
+  variant     ProductVariant @relation(fields: [variantId], references: [id])
+  productName String
+  teamName    String
+  size        String
+  kitType     String
+  price       Int
+  quantity    Int
+}

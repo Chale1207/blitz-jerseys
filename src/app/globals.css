@@ -1,0 +1,208 @@
+@import "tailwindcss";
+
+:root {
+  --background: #fbf9f3;
+  --foreground: #0d1414;
+
+  /* Brand: turf teal */
+  --color-brand-50: #eaf4f2;
+  --color-brand-100: #cde6e2;
+  --color-brand-300: #6ba8a1;
+  --color-brand-500: #1f6e68;
+  --color-brand-600: #1a5d58;
+  --color-brand-700: #154c48;
+  --color-brand-900: #0d2f2c;
+
+  /* Floodlight gold (CTA / signature glow) */
+  --color-accent-300: #ffe4a3;
+  --color-accent-400: #ffc233;
+  --color-accent-500: #f5a623;
+  --color-accent-600: #d98c0f;
+
+  /* Pitch-night ink (dark sections) */
+  --color-ink-900: #0b1211;
+  --color-ink-800: #121b1a;
+  --color-ink-700: #1a2624;
+
+  /* Warm chalk surfaces, not clinical white */
+  --color-surface: #fbf9f3;
+  --color-surface-muted: #f1ede1;
+  --color-muted: #666f68;
+  --color-border: #e3ded0;
+
+  --color-danger: #c8102e;
+  --color-success: #1f8a4c;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-brand-50: var(--color-brand-50);
+  --color-brand-100: var(--color-brand-100);
+  --color-brand-300: var(--color-brand-300);
+  --color-brand-500: var(--color-brand-500);
+  --color-brand-600: var(--color-brand-600);
+  --color-brand-700: var(--color-brand-700);
+  --color-brand-900: var(--color-brand-900);
+
+  --color-accent-300: var(--color-accent-300);
+  --color-accent-400: var(--color-accent-400);
+  --color-accent-500: var(--color-accent-500);
+  --color-accent-600: var(--color-accent-600);
+
+  --color-ink-900: var(--color-ink-900);
+  --color-ink-800: var(--color-ink-800);
+  --color-ink-700: var(--color-ink-700);
+
+  --color-surface: var(--color-surface);
+  --color-surface-muted: var(--color-surface-muted);
+  --color-muted: var(--color-muted);
+  --color-border: var(--color-border);
+  --color-danger: var(--color-danger);
+  --color-success: var(--color-success);
+
+  --font-display: var(--font-anton);
+  --font-head: var(--font-oswald);
+  --font-sans: var(--font-archivo);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+h2,
+h3,
+h4,
+.font-head {
+  font-family: var(--font-head), Arial, Helvetica, sans-serif;
+  letter-spacing: 0.01em;
+}
+
+h1,
+.font-display {
+  font-family: var(--font-display), Arial, Helvetica, sans-serif;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+/* Signature: a low, warm floodlight glow — the one recurring motif that ties
+   dark "match night" sections back to the brand gold. Used sparingly. */
+.floodlight {
+  position: relative;
+  isolation: isolate;
+}
+
+.floodlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(
+    60% 55% at 50% 0%,
+    color-mix(in srgb, var(--color-accent-500) 22%, transparent) 0%,
+    color-mix(in srgb, var(--color-brand-500) 16%, transparent) 45%,
+    transparent 75%
+  );
+}
+
+/* Scoreboard-style ticker: real purpose is showing the club lineup in motion.
+   Only animates when motion is not reduced; otherwise the first set is static. */
+@keyframes ticker-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ticker-track {
+    animation: ticker-scroll 26s linear infinite;
+  }
+}
+
+/* Product card hover: a single diagonal floodlight sweep, not a generic
+   fade-up. Ties back to the hero's match-night glow. */
+.shine-sweep {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine-sweep::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 35%,
+    color-mix(in srgb, var(--color-accent-300) 45%, white) 50%,
+    transparent 65%
+  );
+  transform: translateX(-130%);
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.group:hover .shine-sweep::after {
+  transform: translateX(130%);
+}
+
+.text-shine {
+  background: linear-gradient(
+    100deg,
+    var(--color-accent-300) 0%,
+    var(--color-accent-500) 45%,
+    var(--color-accent-300) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--color-accent-500);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Text reflows smoothly across breakpoints instead of snapping — noticeable
+   when resizing the window or rotating a device. */
+h1,
+h2,
+h3,
+p,
+.font-display,
+.font-head {
+  transition: font-size 0.3s ease, letter-spacing 0.3s ease;
+}
+
+.container-page {
+  max-width: 84rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  transition: padding-inline 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  .container-page {
+    padding-inline: 2rem;
+  }
+}
