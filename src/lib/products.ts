@@ -28,6 +28,14 @@ export function getFeaturedProducts(take = 4) {
   });
 }
 
+export function getPromoProducts() {
+  return prisma.product.findMany({
+    where: { onSale: true },
+    include: { team: { include: { league: true } }, variants: true },
+    orderBy: { createdAt: "asc" },
+  });
+}
+
 export function getProductBySlug(slug: string) {
   return prisma.product.findUnique({
     where: { slug },

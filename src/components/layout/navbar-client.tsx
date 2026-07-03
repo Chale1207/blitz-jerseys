@@ -42,6 +42,13 @@ export function NavbarClient({ leagues }: { leagues: League[] }) {
       {open ? (
         <div className="absolute left-0 right-0 top-full z-40 border-b border-border bg-surface shadow-brand-lg md:hidden">
           <nav className="container-page flex flex-col py-2">
+            <Link
+              href="/promotions"
+              className="border-b border-border py-3 text-sm font-medium uppercase tracking-wide text-accent-600"
+              onClick={() => setOpen(false)}
+            >
+              Promotions
+            </Link>
             {leagues.map((league) => (
               <Link
                 key={league.slug}

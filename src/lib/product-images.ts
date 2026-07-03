@@ -31,6 +31,41 @@ export const productImages: Record<string, { src: string; alt: string }[]> = {
     { src: "/images/products/real-madrid/front.jpg", alt: "Real Madrid home kit, front" },
     { src: "/images/products/real-madrid/back.jpg", alt: "Real Madrid home kit, back" },
   ],
+
+  // Promotional / last-season clearance stock
+  "chelsea-away-kit-2025-26": [
+    { src: "/images/products/chelsea-away-kit-2025-26/front.jpg", alt: "Chelsea away kit 2025/26, front" },
+    { src: "/images/products/chelsea-away-kit-2025-26/back.jpg", alt: "Chelsea away kit 2025/26, back" },
+  ],
+  "barcelona-away-kit-2025-26": [
+    { src: "/images/products/barcelona-away-kit-2025-26/front.jpg", alt: "Barcelona away kit 2025/26, front" },
+    { src: "/images/products/barcelona-away-kit-2025-26/back.jpg", alt: "Barcelona away kit 2025/26, back" },
+    { src: "/images/products/barcelona-away-kit-2025-26/badge.jpg", alt: "Barcelona away kit badge detail" },
+  ],
+  "real-madrid-home-kit-2025-26": [
+    { src: "/images/products/real-madrid-home-kit-2025-26/front.jpg", alt: "Real Madrid home kit 2025/26, front" },
+    { src: "/images/products/real-madrid-home-kit-2025-26/back.jpg", alt: "Real Madrid home kit 2025/26, back" },
+  ],
+  "liverpool-home-kit-2025-26": [
+    { src: "/images/products/liverpool-home-kit-2025-26/front.jpg", alt: "Liverpool home kit 2025/26, front" },
+    { src: "/images/products/liverpool-home-kit-2025-26/back.jpg", alt: "Liverpool home kit 2025/26, back" },
+  ],
+  "manchester-united-away-kit-2025-26": [
+    { src: "/images/products/manchester-united-away-kit-2025-26/front.jpg", alt: "Manchester United away kit 2025/26, front" },
+    { src: "/images/products/manchester-united-away-kit-2025-26/back.jpg", alt: "Manchester United away kit 2025/26, back" },
+  ],
+  "manchester-city-home-kit-2025-26": [
+    { src: "/images/products/manchester-city-home-kit-2025-26/front.jpg", alt: "Manchester City home kit 2025/26, front" },
+    { src: "/images/products/manchester-city-home-kit-2025-26/back.jpg", alt: "Manchester City home kit 2025/26, back" },
+  ],
+  "manchester-city-away-kit-2025-26": [
+    { src: "/images/products/manchester-city-away-kit-2025-26/front.jpg", alt: "Manchester City away kit 2025/26, front" },
+    { src: "/images/products/manchester-city-away-kit-2025-26/alt.jpg", alt: "Manchester City away kit 2025/26, alternate angle" },
+  ],
+  "manchester-city-third-kit-2025-26": [
+    { src: "/images/products/manchester-city-third-kit-2025-26/front.jpg", alt: "Manchester City third kit 2025/26, front" },
+    { src: "/images/products/manchester-city-third-kit-2025-26/back.jpg", alt: "Manchester City third kit 2025/26, back" },
+  ],
 };
 
 export function getProductImages(productSlug: string) {

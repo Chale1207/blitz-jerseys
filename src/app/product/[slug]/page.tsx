@@ -14,7 +14,7 @@ export async function generateMetadata({
 }) {
   const { slug } = await params;
   const product = await getProductBySlug(slug);
-  if (!product) return { title: "Blitz Jerseys" };
+  if (!product) return { title: undefined };
 
   const title = `${product.team.name} ${product.name} ${product.season}`;
   const description = product.description;

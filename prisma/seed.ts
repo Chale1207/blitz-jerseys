@@ -18,6 +18,10 @@ type SeedProduct = {
   kitLabel: string; // e.g. "Home Kit", "Home Kit (Polo)", "Training Kit"
   stockByS: Record<"XS" | "S" | "M" | "L" | "XL" | "XXL", number>;
   featured?: boolean;
+  onSale?: boolean;
+  season?: string; // defaults to SEASON
+  price?: number; // defaults to PRICE
+  note?: string; // extra line appended to the description
 };
 
 type SeedTeam = {
@@ -64,6 +68,13 @@ const LEAGUES: SeedLeague[] = [
         secondaryColor: "#FDB913",
         products: [
           { kitLabel: "Home Kit (Polo)", stockByS: { XS: 0, S: 1, M: 1, L: 1, XL: 0, XXL: 0 } },
+          {
+            kitLabel: "Away Kit",
+            stockByS: { XS: 0, S: 1, M: 1, L: 0, XL: 1, XXL: 0 },
+            onSale: true,
+            season: "2025/26",
+            price: 150,
+          },
         ],
       },
       {
@@ -78,6 +89,13 @@ const LEAGUES: SeedLeague[] = [
             stockByS: { XS: 0, S: 1, M: 3, L: 3, XL: 0, XXL: 0 },
             featured: true,
           },
+          {
+            kitLabel: "Away Kit",
+            stockByS: { XS: 0, S: 0, M: 0, L: 2, XL: 0, XXL: 0 },
+            onSale: true,
+            season: "2025/26",
+            price: 150,
+          },
         ],
       },
       {
@@ -88,6 +106,44 @@ const LEAGUES: SeedLeague[] = [
         secondaryColor: "#FFFFFF",
         products: [
           { kitLabel: "Home Kit", stockByS: { XS: 0, S: 0, M: 2, L: 2, XL: 0, XXL: 0 } },
+          {
+            kitLabel: "Home Kit",
+            stockByS: { XS: 0, S: 0, M: 2, L: 0, XL: 0, XXL: 0 },
+            onSale: true,
+            season: "2025/26",
+            price: 150,
+          },
+        ],
+      },
+      {
+        slug: "manchester-city",
+        name: "Manchester City",
+        shortName: "MCI",
+        primaryColor: "#6CABDD",
+        secondaryColor: "#1C2C5B",
+        products: [
+          {
+            kitLabel: "Home Kit",
+            stockByS: { XS: 0, S: 0, M: 1, L: 1, XL: 0, XXL: 0 },
+            onSale: true,
+            season: "2025/26",
+            price: 150,
+          },
+          {
+            kitLabel: "Away Kit",
+            stockByS: { XS: 0, S: 0, M: 0, L: 0, XL: 1, XXL: 0 },
+            onSale: true,
+            season: "2025/26",
+            price: 150,
+            note: "Available in short sleeve.",
+          },
+          {
+            kitLabel: "Third Kit",
+            stockByS: { XS: 0, S: 0, M: 1, L: 0, XL: 0, XXL: 0 },
+            onSale: true,
+            season: "2025/26",
+            price: 150,
+          },
         ],
       },
     ],
@@ -115,6 +171,13 @@ const LEAGUES: SeedLeague[] = [
             stockByS: { XS: 0, S: 1, M: 1, L: 1, XL: 0, XXL: 2 },
             featured: true,
           },
+          {
+            kitLabel: "Away Kit",
+            stockByS: { XS: 0, S: 0, M: 0, L: 0, XL: 0, XXL: 1 },
+            onSale: true,
+            season: "2025/26",
+            price: 150,
+          },
         ],
       },
       {
@@ -128,6 +191,13 @@ const LEAGUES: SeedLeague[] = [
             kitLabel: "Home Kit",
             stockByS: { XS: 0, S: 1, M: 2, L: 2, XL: 2, XXL: 0 },
             featured: true,
+          },
+          {
+            kitLabel: "Home Kit",
+            stockByS: { XS: 0, S: 0, M: 0, L: 1, XL: 0, XXL: 0 },
+            onSale: true,
+            season: "2025/26",
+            price: 150,
           },
         ],
       },
@@ -169,15 +239,25 @@ async function main() {
       });
 
       for (const item of team.products) {
+        const season = item.season ?? SEASON;
+        const price = item.price ?? PRICE;
+        const description = [
+          `${item.kitLabel} for ${team.name}, ${season} season. Breathable performance fabric built for match day and street wear alike.`,
+          item.note,
+        ]
+          .filter(Boolean)
+          .join(" ");
+
         const product = await prisma.product.create({
           data: {
-            slug: `${team.slug}-${slugify(item.kitLabel)}-${SEASON.replace("/", "-")}`,
+            slug: `${team.slug}-${slugify(item.kitLabel)}-${season.replace("/", "-")}`,
             name: item.kitLabel,
             kitType: item.kitLabel,
-            season: SEASON,
-            price: PRICE,
-            description: `${item.kitLabel} for ${team.name}, ${SEASON} season. Breathable performance fabric built for match day and street wear alike.`,
+            season,
+            price,
+            description,
             featured: Boolean(item.featured),
+            onSale: Boolean(item.onSale),
             teamId: createdTeam.id,
           },
         });

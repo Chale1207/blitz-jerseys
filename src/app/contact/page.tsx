@@ -6,7 +6,7 @@ import {
   XIcon as XSocialIcon,
 } from "@/components/icons/social-icons";
 
-export const metadata = { title: "Contact | Blitz Jerseys" };
+export const metadata = { title: "Contact" };
 
 const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "";
 

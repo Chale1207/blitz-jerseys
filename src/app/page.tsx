@@ -3,12 +3,13 @@ import { ShieldCheck, MessageCircle, Truck } from "lucide-react";
 import { Hero } from "@/components/home/hero";
 import { ProductCard } from "@/components/product/product-card";
 import { ProductGrid } from "@/components/product/product-grid";
-import { getFeaturedProducts, getLeaguesWithTeams } from "@/lib/products";
+import { getFeaturedProducts, getLeaguesWithTeams, getPromoProducts } from "@/lib/products";
 
 export default async function Home() {
-  const [featured, leagues] = await Promise.all([
+  const [featured, leagues, promoProducts] = await Promise.all([
     getFeaturedProducts(8),
     getLeaguesWithTeams(),
+    getPromoProducts(),
   ]);
 
   return (
@@ -40,6 +41,30 @@ export default async function Home() {
           </div>
         </div>
       </section>
+
+      {promoProducts.length > 0 ? (
+        <section className="border-b border-border bg-gradient-to-r from-accent-500 to-accent-600 py-8">
+          <div className="container-page flex flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-left">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-widest text-ink-900/70">
+                Limited Stock &middot; Last Season
+              </p>
+              <h2 className="mt-1 font-display text-2xl font-bold uppercase leading-tight text-ink-900 md:text-3xl">
+                Promotions Are Live
+              </h2>
+              <p className="mt-1 text-sm text-ink-900/80">
+                2025/26 kits at clearance prices &mdash; while stock lasts.
+              </p>
+            </div>
+            <Link
+              href="/promotions"
+              className="inline-flex shrink-0 items-center justify-center rounded-full bg-ink-900 px-7 py-3.5 text-sm font-bold uppercase tracking-wide text-white shadow-brand transition-transform duration-200 hover:scale-105 active:scale-95"
+            >
+              Shop Promotions
+            </Link>
+          </div>
+        </section>
+      ) : null}
 
       <section className="container-page py-14">
         <div className="mb-8 flex items-end justify-between">

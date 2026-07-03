@@ -11,6 +11,7 @@ type CardProduct = {
   kitType: string;
   season: string;
   price: number;
+  onSale?: boolean;
   team: { slug: string; name: string; shortName: string; primaryColor: string; secondaryColor: string; league: { name: string } };
   variants: { stock: number }[];
 };
@@ -48,6 +49,10 @@ export function ProductCard({ product }: { product: CardProduct }) {
         {!inStock ? (
           <span className="absolute right-3 top-3 rounded-full bg-danger px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
             Sold Out
+          </span>
+        ) : product.onSale ? (
+          <span className="absolute right-3 top-3 rounded-full bg-accent-500 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-ink-900 shadow-accent">
+            Promo
           </span>
         ) : null}
       </div>

@@ -4,7 +4,7 @@ import { ProductGrid } from "@/components/product/product-grid";
 import { getDistinctKitTypes, getLeaguesWithTeams, getProducts } from "@/lib/products";
 import { LEAGUE_DOTS } from "@/lib/league-colors";
 
-export const metadata = { title: "Shop All Kits | Blitz Jerseys" };
+export const metadata = { title: "Shop All Kits" };
 
 export default async function ShopPage({
   searchParams,

@@ -12,7 +12,7 @@ export async function generateMetadata({
 }) {
   const { league: leagueSlug } = await params;
   const league = await getLeagueBySlug(leagueSlug);
-  return { title: league ? `${league.name} Kits | Blitz Jerseys` : "Blitz Jerseys" };
+  return { title: league ? `${league.name} Kits` : undefined };
 }
 
 export default async function LeagueShopPage({
