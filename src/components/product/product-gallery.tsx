@@ -23,7 +23,7 @@ export function ProductGallery({
 
   if (!images || images.length === 0) {
     return (
-      <div className="rounded-2xl bg-surface-muted p-10">
+      <div className="floodlight relative overflow-hidden rounded-3xl bg-ink-900 p-10">
         <JerseyArt
           primaryColor={primaryColor}
           secondaryColor={secondaryColor}
@@ -37,13 +37,13 @@ export function ProductGallery({
 
   return (
     <div>
-      <div className="relative aspect-square overflow-hidden rounded-2xl bg-surface-muted">
+      <div className="floodlight relative aspect-square overflow-hidden rounded-3xl bg-ink-900">
         <Image
           src={images[active].src}
           alt={images[active].alt}
           fill
           sizes="(min-width: 768px) 40vw, 90vw"
-          className="object-contain p-4"
+          className="object-contain p-8"
           priority
         />
       </div>
@@ -55,11 +55,11 @@ export function ProductGallery({
               type="button"
               onClick={() => setActive(i)}
               aria-label={`Show image ${i + 1}`}
-              className={`relative h-16 w-16 shrink-0 overflow-hidden rounded-lg bg-surface-muted ring-2 transition-colors ${
-                active === i ? "ring-brand-500" : "ring-transparent hover:ring-border"
+              className={`relative h-16 w-16 shrink-0 overflow-hidden rounded-lg bg-ink-900 ring-2 transition-colors ${
+                active === i ? "ring-accent-500" : "ring-white/10 hover:ring-white/30"
               }`}
             >
-              <Image src={image.src} alt={image.alt} fill sizes="64px" className="object-contain p-1" />
+              <Image src={image.src} alt={image.alt} fill sizes="64px" className="object-contain p-1.5" />
             </button>
           ))}
         </div>

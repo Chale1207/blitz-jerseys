@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { ChevronRight } from "lucide-react";
 import { ProductGallery } from "@/components/product/product-gallery";
 import { AddToCart } from "@/components/product/add-to-cart";
-import { formatPrice, numberFromSlug } from "@/lib/format";
+import { formatPrice, isLightColor, numberFromSlug } from "@/lib/format";
 import { getProductBySlug, totalStock } from "@/lib/products";
 import { getProductImages } from "@/lib/product-images";
 
@@ -41,6 +41,10 @@ export default async function ProductPage({
     const order = ["S", "M", "L", "XL", "XXL"];
     return order.indexOf(a.size) - order.indexOf(b.size);
   });
+
+  const dotColor = isLightColor(product.team.primaryColor)
+    ? product.team.secondaryColor
+    : product.team.primaryColor;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -86,7 +90,12 @@ export default async function ProductPage({
         />
 
         <div>
-          <p className="text-xs font-semibold uppercase tracking-widest text-brand-600">
+          <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-brand-600">
+            <span
+              className="h-1.5 w-1.5 rounded-full"
+              style={{ backgroundColor: dotColor }}
+              aria-hidden
+            />
             {product.team.name}
           </p>
           <h1 className="mt-1 font-display text-3xl font-bold uppercase text-ink-900 md:text-4xl">

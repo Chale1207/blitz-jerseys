@@ -1,3 +1,5 @@
+import { isLightColor } from "@/lib/format";
+
 type JerseyArtProps = {
   primaryColor: string;
   secondaryColor: string;
@@ -19,8 +21,8 @@ export function JerseyArt({
   className,
 }: JerseyArtProps) {
   const trimColor =
-    isLight(primaryColor) && isLight(secondaryColor) ? "#1a2624" : secondaryColor;
-  const badgeTextColor = isLight(primaryColor) ? trimColor : primaryColor;
+    isLightColor(primaryColor) && isLightColor(secondaryColor) ? "#1a2624" : secondaryColor;
+  const badgeTextColor = isLightColor(primaryColor) ? trimColor : primaryColor;
 
   return (
     <svg
@@ -92,14 +94,4 @@ export function JerseyArt({
       ) : null}
     </svg>
   );
-}
-
-function isLight(hex: string): boolean {
-  const c = hex.replace("#", "");
-  if (c.length !== 6) return false;
-  const r = parseInt(c.slice(0, 2), 16);
-  const g = parseInt(c.slice(2, 4), 16);
-  const b = parseInt(c.slice(4, 6), 16);
-  const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-  return luminance > 0.75;
 }
