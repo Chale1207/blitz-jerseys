@@ -40,7 +40,7 @@ export function NavbarClient({ leagues }: { leagues: League[] }) {
       </button>
 
       {open ? (
-        <div className="absolute left-0 right-0 top-full z-40 border-b border-border bg-surface shadow-lg md:hidden">
+        <div className="absolute left-0 right-0 top-full z-40 border-b border-border bg-surface shadow-brand-lg md:hidden">
           <nav className="container-page flex flex-col py-2">
             {leagues.map((league) => (
               <Link

@@ -65,6 +65,12 @@
   --font-display: var(--font-anton);
   --font-head: var(--font-oswald);
   --font-sans: var(--font-archivo);
+
+  /* Brand-tinted elevation instead of generic gray shadows — every card
+     and button lift should read as Blitz, not a template default. */
+  --shadow-brand: 0 8px 20px -6px color-mix(in srgb, var(--color-brand-500) 35%, transparent);
+  --shadow-brand-lg: 0 20px 42px -10px color-mix(in srgb, var(--color-brand-500) 45%, transparent);
+  --shadow-accent: 0 10px 26px -6px color-mix(in srgb, var(--color-accent-500) 50%, transparent);
 }
 
 body {

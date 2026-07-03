@@ -114,7 +114,7 @@ export function Hero() {
           <div className="mt-8 flex flex-wrap gap-4">
             <Link
               href="/shop"
-              className="inline-flex items-center justify-center rounded-full bg-accent-500 px-7 py-3.5 font-head text-sm font-bold uppercase tracking-wide text-ink-900 transition-transform duration-200 hover:scale-105 hover:bg-accent-400 active:scale-95"
+              className="inline-flex items-center justify-center rounded-full bg-accent-500 px-7 py-3.5 font-head text-sm font-bold uppercase tracking-wide text-ink-900 shadow-accent transition-transform duration-200 hover:scale-105 hover:bg-accent-400 active:scale-95"
             >
               Shop Now
             </Link>

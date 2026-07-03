@@ -27,7 +27,7 @@ export default function CartPage() {
         <p className="mt-2 text-sm text-muted">Pick a kit and get in the game.</p>
         <Link
           href="/shop"
-          className="mt-6 inline-flex rounded-full bg-brand-500 px-7 py-3 text-sm font-bold uppercase tracking-wide text-white transition-transform hover:scale-105"
+          className="mt-6 inline-flex rounded-full bg-brand-500 px-7 py-3 text-sm font-bold uppercase tracking-wide text-white shadow-brand transition-transform hover:scale-105"
         >
           Shop Kits
         </Link>
@@ -105,7 +105,7 @@ export default function CartPage() {
           ))}
         </div>
 
-        <div className="h-fit rounded-2xl border border-border bg-surface p-6">
+        <div className="h-fit rounded-2xl border border-border bg-surface p-6 shadow-brand">
           <h2 className="text-lg font-bold uppercase text-ink-900">Order Summary</h2>
           <div className="mt-4 flex justify-between text-sm text-muted">
             <span>Subtotal</span>
@@ -116,7 +116,7 @@ export default function CartPage() {
           </p>
           <Link
             href="/checkout"
-            className="mt-6 block rounded-full bg-accent-500 py-3.5 text-center text-sm font-bold uppercase tracking-wide text-ink-900 transition-transform hover:scale-[1.02] hover:bg-accent-400 active:scale-95"
+            className="mt-6 block rounded-full bg-accent-500 py-3.5 text-center text-sm font-bold uppercase tracking-wide text-ink-900 shadow-accent transition-transform hover:scale-[1.02] hover:bg-accent-400 active:scale-95"
           >
             Checkout
           </Link>

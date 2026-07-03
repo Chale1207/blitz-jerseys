@@ -22,7 +22,7 @@ export function ProductCard({ product }: { product: CardProduct }) {
   return (
     <Link
       href={`/product/${product.slug}`}
-      className="group block overflow-hidden rounded-2xl border border-border bg-surface transition-shadow duration-200 hover:shadow-lg"
+      className="group block overflow-hidden rounded-2xl border border-border bg-surface shadow-brand transition-shadow duration-200 hover:shadow-brand-lg"
     >
       <div className="shine-sweep relative aspect-[4/5] overflow-hidden bg-surface-muted p-6">
         {images ? (

@@ -84,7 +84,7 @@ export function AddToCart({
         type="button"
         onClick={handleAdd}
         disabled={!selectedVariant || selectedVariant.stock === 0}
-        className="mt-6 w-full rounded-full bg-accent-500 py-3.5 text-sm font-bold uppercase tracking-wide text-ink-900 transition-transform duration-150 hover:scale-[1.02] hover:bg-accent-400 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100"
+        className="mt-6 w-full rounded-full bg-accent-500 py-3.5 text-sm font-bold uppercase tracking-wide text-ink-900 shadow-accent transition-transform duration-150 hover:scale-[1.02] hover:bg-accent-400 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none disabled:hover:scale-100"
       >
         {inStockVariants.length === 0 ? "Sold Out" : justAdded ? "Added to Cart" : "Add to Cart"}
       </button>

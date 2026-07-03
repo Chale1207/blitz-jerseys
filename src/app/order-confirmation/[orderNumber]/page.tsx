@@ -52,12 +52,12 @@ export default async function OrderConfirmationPage({
         href={whatsappLink}
         target="_blank"
         rel="noopener noreferrer"
-        className="mt-8 inline-flex items-center gap-2 rounded-full bg-brand-500 px-8 py-3.5 text-sm font-bold uppercase tracking-wide text-white transition-transform hover:scale-105 active:scale-95"
+        className="mt-8 inline-flex items-center gap-2 rounded-full bg-brand-500 px-8 py-3.5 text-sm font-bold uppercase tracking-wide text-white shadow-brand transition-transform hover:scale-105 active:scale-95"
       >
         <MessageCircle className="h-5 w-5" /> Confirm via WhatsApp
       </a>
 
-      <div className="mt-10 w-full max-w-md rounded-2xl border border-border bg-surface p-6 text-left">
+      <div className="mt-10 w-full max-w-md rounded-2xl border border-border bg-surface p-6 text-left shadow-brand">
         <h2 className="text-sm font-bold uppercase tracking-wide text-ink-900">
           Order Summary
         </h2>

@@ -57,7 +57,7 @@ export default async function Home() {
             <Link
               key={league.slug}
               href={`/shop/${league.slug}`}
-              className="group relative overflow-hidden rounded-2xl bg-ink-900 p-8 text-white transition-transform duration-200 hover:-translate-y-1"
+              className="group relative overflow-hidden rounded-2xl bg-ink-900 p-8 text-white transition-transform duration-200 hover:-translate-y-1 hover:shadow-brand-lg"
             >
               <p className="text-xs font-semibold uppercase tracking-widest text-brand-300">
                 {league.country}
@@ -87,7 +87,7 @@ export default async function Home() {
           </p>
           <Link
             href="/custom-order"
-            className="mt-2 inline-flex items-center justify-center rounded-full bg-accent-500 px-7 py-3.5 text-sm font-bold uppercase tracking-wide text-ink-900 transition-transform duration-200 hover:scale-105 hover:bg-accent-400 active:scale-95"
+            className="mt-2 inline-flex items-center justify-center rounded-full bg-accent-500 px-7 py-3.5 text-sm font-bold uppercase tracking-wide text-ink-900 shadow-accent transition-transform duration-200 hover:scale-105 hover:bg-accent-400 active:scale-95"
           >
             Start a Custom Order
           </Link>

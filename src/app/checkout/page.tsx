@@ -38,7 +38,7 @@ export default function CheckoutPage() {
         </h1>
         <Link
           href="/shop"
-          className="mt-6 inline-flex rounded-full bg-brand-500 px-7 py-3 text-sm font-bold uppercase tracking-wide text-white"
+          className="mt-6 inline-flex rounded-full bg-brand-500 px-7 py-3 text-sm font-bold uppercase tracking-wide text-white shadow-brand"
         >
           Shop Kits
         </Link>
@@ -173,7 +173,7 @@ export default function CheckoutPage() {
           <button
             type="submit"
             disabled={submitting}
-            className="w-full rounded-full bg-accent-500 py-3.5 text-sm font-bold uppercase tracking-wide text-ink-900 transition-transform hover:scale-[1.01] hover:bg-accent-400 active:scale-95 disabled:opacity-60"
+            className="w-full rounded-full bg-accent-500 py-3.5 text-sm font-bold uppercase tracking-wide text-ink-900 shadow-accent transition-transform hover:scale-[1.01] hover:bg-accent-400 active:scale-95 disabled:opacity-60 disabled:shadow-none"
           >
             {submitting ? "Placing Order..." : "Place Order"}
           </button>
@@ -183,7 +183,7 @@ export default function CheckoutPage() {
           </p>
         </form>
 
-        <div className="h-fit rounded-2xl border border-border bg-surface p-6">
+        <div className="h-fit rounded-2xl border border-border bg-surface p-6 shadow-brand">
           <h2 className="text-lg font-bold uppercase text-ink-900">Order Summary</h2>
           <ul className="mt-4 space-y-2 text-sm">
             {items.map((item) => (
