@@ -60,6 +60,13 @@ export function NavbarClient({ leagues }: { leagues: League[] }) {
               Shop All
             </Link>
             <Link
+              href="/custom-order"
+              className="py-3 text-sm font-medium uppercase tracking-wide text-ink-900"
+              onClick={() => setOpen(false)}
+            >
+              Custom Order
+            </Link>
+            <Link
               href="/about"
               className="py-3 text-sm font-medium uppercase tracking-wide text-ink-900"
               onClick={() => setOpen(false)}

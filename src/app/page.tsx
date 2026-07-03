@@ -73,7 +73,28 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="container-page pb-20">
+      <section className="floodlight border-y border-border bg-ink-900 py-14 text-white">
+        <div className="container-page flex flex-col items-center gap-5 text-center">
+          <p className="text-xs font-semibold uppercase tracking-widest text-brand-300">
+            Not in the Shop Yet?
+          </p>
+          <h2 className="max-w-xl font-display text-2xl font-bold uppercase leading-tight md:text-3xl">
+            Any Club, Any Kit &mdash; We&apos;ll Source It
+          </h2>
+          <p className="max-w-md text-sm text-white/70">
+            Retro seasons, national teams, name and number printing &mdash; tell
+            us what you want and we&apos;ll get it made.
+          </p>
+          <Link
+            href="/custom-order"
+            className="mt-2 inline-flex items-center justify-center rounded-full bg-accent-500 px-7 py-3.5 text-sm font-bold uppercase tracking-wide text-ink-900 transition-transform duration-200 hover:scale-105 hover:bg-accent-400 active:scale-95"
+          >
+            Start a Custom Order
+          </Link>
+        </div>
+      </section>
+
+      <section className="container-page pt-14 pb-20">
         <div className="mb-8 flex items-end justify-between">
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest text-brand-600">

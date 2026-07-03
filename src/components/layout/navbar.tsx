@@ -40,6 +40,12 @@ export async function Navbar() {
             Shop All
           </Link>
           <Link
+            href="/custom-order"
+            className="text-sm font-semibold uppercase tracking-wide text-ink-900 transition-colors hover:text-brand-500"
+          >
+            Custom Order
+          </Link>
+          <Link
             href="/about"
             className="text-sm font-semibold uppercase tracking-wide text-ink-900 transition-colors hover:text-brand-500"
           >

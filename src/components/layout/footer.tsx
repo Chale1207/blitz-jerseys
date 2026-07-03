@@ -57,6 +57,7 @@ export function Footer() {
             <li><Link href="/shop/serie-a" className="hover:text-brand-300">Serie A</Link></li>
             <li><Link href="/shop/la-liga" className="hover:text-brand-300">LaLiga</Link></li>
             <li><Link href="/shop" className="hover:text-brand-300">All Kits</Link></li>
+            <li><Link href="/custom-order" className="hover:text-brand-300">Custom Order</Link></li>
           </ul>
         </div>
 
