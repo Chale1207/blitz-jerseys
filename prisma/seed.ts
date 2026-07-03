@@ -64,7 +64,6 @@ const LEAGUES: SeedLeague[] = [
         secondaryColor: "#FDB913",
         products: [
           { kitLabel: "Home Kit (Polo)", stockByS: { XS: 0, S: 1, M: 1, L: 1, XL: 0, XXL: 0 } },
-          { kitLabel: "Training Kit", stockByS: { XS: 0, S: 0, M: 0, L: 0, XL: 0, XXL: 0 } },
         ],
       },
       {
