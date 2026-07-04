@@ -51,7 +51,7 @@ export function ProductCard({ product }: { product: CardProduct }) {
             Sold Out
           </span>
         ) : product.onSale ? (
-          <span className="absolute right-3 top-3 rounded-full bg-accent-500 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-ink-900 shadow-accent">
+          <span className="absolute right-3 top-3 rounded-full bg-brand-500 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-white shadow-brand">
             Promo
           </span>
         ) : null}
