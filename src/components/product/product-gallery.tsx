@@ -37,7 +37,8 @@ export function ProductGallery({
 
   return (
     <div>
-      <div className="floodlight relative aspect-square overflow-hidden rounded-3xl bg-ink-900">
+      <div className="relative aspect-square overflow-hidden rounded-3xl bg-surface-muted">
+        <div className="absolute inset-x-0 bottom-0 h-[3px] bg-gradient-to-r from-brand-900 via-brand-500 to-brand-300" />
         <Image
           src={images[active].src}
           alt={images[active].alt}
@@ -55,8 +56,8 @@ export function ProductGallery({
               type="button"
               onClick={() => setActive(i)}
               aria-label={`Show image ${i + 1}`}
-              className={`relative h-16 w-16 shrink-0 overflow-hidden rounded-lg bg-ink-900 ring-2 transition-colors ${
-                active === i ? "ring-brand-300" : "ring-white/10 hover:ring-white/30"
+              className={`relative h-16 w-16 shrink-0 overflow-hidden rounded-lg bg-surface-muted ring-2 transition-colors ${
+                active === i ? "ring-brand-500" : "ring-border hover:ring-brand-300"
               }`}
             >
               <Image src={image.src} alt={image.alt} fill sizes="64px" className="object-contain p-1.5" />
