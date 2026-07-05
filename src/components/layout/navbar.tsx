@@ -5,6 +5,7 @@ import { NavbarClient } from "./navbar-client";
 
 export async function Navbar() {
   const leagues = await prisma.league.findMany({
+    where: { slug: { not: "serie-a" } },
     orderBy: { name: "asc" },
     select: { slug: true, name: true },
   });

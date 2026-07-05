@@ -77,21 +77,21 @@ export default async function Home() {
             </h2>
           </div>
         </div>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-          {leagues.map((league) => (
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          {leagues.filter((l) => l.slug !== "serie-a").map((league) => (
             <Link
               key={league.slug}
               href={`/shop/${league.slug}`}
-              className="group relative overflow-hidden rounded-2xl bg-ink-900 p-8 text-white transition-transform duration-200 hover:-translate-y-1 hover:shadow-brand-lg"
+              className="group relative overflow-hidden rounded-2xl bg-ink-900 px-10 py-12 text-white transition-transform duration-200 hover:-translate-y-1 hover:shadow-brand-lg"
             >
-              <p className="text-xs font-semibold uppercase tracking-widest text-brand-300">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-brand-300">
                 {league.country}
               </p>
-              <p className="mt-2 font-display text-xl font-bold uppercase">
+              <p className="mt-3 font-head text-4xl font-bold uppercase leading-none tracking-tight">
                 {league.name}
               </p>
-              <p className="mt-4 text-sm text-white/60">
-                {league.teams.length} clubs available &rarr;
+              <p className="mt-5 text-sm text-white/50">
+                {league.teams.length}&nbsp;clubs available &rarr;
               </p>
             </Link>
           ))}
