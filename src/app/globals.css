@@ -262,6 +262,33 @@ p,
   transition: font-size 0.3s ease, letter-spacing 0.3s ease;
 }
 
+/* Admin shared input/label primitives */
+.admin-label {
+  display: block;
+  margin-bottom: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-muted);
+}
+
+.admin-input {
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-border);
+  background: #fff;
+  padding: 0.625rem 0.875rem;
+  font-size: 0.875rem;
+  color: var(--color-ink-900);
+  outline: none;
+}
+
+.admin-input:focus {
+  border-color: var(--color-brand-500);
+  box-shadow: 0 0 0 1px var(--color-brand-500);
+}
+
 .container-page {
   max-width: 84rem;
   margin-inline: auto;

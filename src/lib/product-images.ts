@@ -68,6 +68,15 @@ export const productImages: Record<string, { src: string; alt: string }[]> = {
   ],
 };
 
-export function getProductImages(productSlug: string) {
+export function getProductImages(
+  productSlug: string,
+  imagesJson?: string | null
+) {
+  if (imagesJson) {
+    try {
+      const parsed = JSON.parse(imagesJson) as { src: string; alt: string }[];
+      if (parsed.length) return parsed;
+    } catch {}
+  }
   return productImages[productSlug] ?? null;
 }

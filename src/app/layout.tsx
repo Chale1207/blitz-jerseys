@@ -1,9 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Anton, Oswald, Archivo } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "@/components/layout/navbar";
-import { Footer } from "@/components/layout/footer";
-import { FloatingShopBtn } from "@/components/layout/floating-shop-btn";
+import { SiteChrome } from "@/components/layout/site-chrome";
 
 const anton = Anton({
   variable: "--font-anton",
@@ -69,10 +67,7 @@ export default function RootLayout({
       className={`${anton.variable} ${oswald.variable} ${archivo.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <FloatingShopBtn />
-        <Footer />
+        <SiteChrome>{children}</SiteChrome>
       </body>
     </html>
   );

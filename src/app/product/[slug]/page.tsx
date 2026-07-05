@@ -18,7 +18,7 @@ export async function generateMetadata({
 
   const title = `${product.team.name} ${product.name} ${product.season}`;
   const description = product.description;
-  const image = getProductImages(product.slug)?.[0]?.src;
+  const image = getProductImages(product.slug, product.imagesJson)?.[0]?.src;
 
   return {
     title,
@@ -51,7 +51,7 @@ export default async function ProductPage({
     "@type": "Product",
     name: `${product.team.name} ${product.name} ${product.season}`,
     description: product.description,
-    image: getProductImages(product.slug)?.map((img) => img.src),
+    image: getProductImages(product.slug, product.imagesJson)?.map((img) => img.src),
     brand: { "@type": "Brand", name: "Blitz Jerseys" },
     offers: {
       "@type": "Offer",
@@ -82,7 +82,7 @@ export default async function ProductPage({
 
       <div className="grid gap-10 md:grid-cols-2 md:gap-14">
         <ProductGallery
-          images={getProductImages(product.slug)}
+          images={getProductImages(product.slug, product.imagesJson)}
           primaryColor={product.team.primaryColor}
           secondaryColor={product.team.secondaryColor}
           initials={product.team.shortName}
