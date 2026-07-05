@@ -12,13 +12,14 @@ type CardProduct = {
   season: string;
   price: number;
   onSale?: boolean;
+  imagesJson?: string | null;
   team: { slug: string; name: string; shortName: string; primaryColor: string; secondaryColor: string; league: { name: string } };
   variants: { stock: number }[];
 };
 
 export function ProductCard({ product }: { product: CardProduct }) {
   const inStock = totalStock(product.variants) > 0;
-  const images = getProductImages(product.slug);
+  const images = getProductImages(product.slug, product.imagesJson);
 
   return (
     <Link

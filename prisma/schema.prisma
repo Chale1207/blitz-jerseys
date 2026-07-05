@@ -38,6 +38,7 @@ model Product {
   description String
   featured    Boolean          @default(false)
   onSale      Boolean          @default(false)
+  imagesJson  String?
   teamId      String
   team        Team             @relation(fields: [teamId], references: [id])
   variants    ProductVariant[]
