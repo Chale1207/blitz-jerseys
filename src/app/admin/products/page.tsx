@@ -1,7 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { Plus, Pencil, Star, Tag } from "lucide-react";
-import { deleteProduct, toggleFeatured, toggleOnSale } from "./actions";
+import { toggleFeatured, toggleOnSale } from "./actions";
+import { DeleteButton } from "./delete-button";
 
 export const metadata = { title: "Products — Admin" };
 
@@ -89,17 +90,7 @@ export default async function ProductsPage() {
                         >
                           <Pencil className="h-3 w-3" /> Edit
                         </Link>
-                        <form action={deleteProduct.bind(null, p.id)}>
-                          <button
-                            type="submit"
-                            className="rounded-lg border border-border px-2.5 py-1.5 text-xs font-semibold text-muted hover:border-danger hover:text-danger"
-                            onClick={(e) => {
-                              if (!confirm(`Delete "${p.name}"? This cannot be undone.`)) e.preventDefault();
-                            }}
-                          >
-                            Delete
-                          </button>
-                        </form>
+                        <DeleteButton id={p.id} name={p.name} />
                       </div>
                     </td>
                   </tr>
