@@ -26,7 +26,7 @@ export async function Navbar() {
         <nav className="hidden items-center gap-7 md:flex">
           <Link
             href="/promotions"
-            className="text-sm font-semibold uppercase tracking-wide text-accent-600 transition-colors hover:text-accent-500"
+            className="text-sm font-semibold uppercase tracking-wide text-brand-600 transition-colors hover:text-brand-500"
           >
             Promotions
           </Link>

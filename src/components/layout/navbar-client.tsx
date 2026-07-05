@@ -23,7 +23,7 @@ export function NavbarClient({ leagues }: { leagues: League[] }) {
       >
         <ShoppingBag className="h-5 w-5" />
         {mounted && totalItems > 0 ? (
-          <span className="absolute right-1 top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-accent-500 px-1 text-[10px] font-bold text-ink-900">
+          <span className="absolute right-1 top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-brand-500 px-1 text-[10px] font-bold text-white">
             {totalItems}
           </span>
         ) : null}
@@ -44,7 +44,7 @@ export function NavbarClient({ leagues }: { leagues: League[] }) {
           <nav className="container-page flex flex-col py-2">
             <Link
               href="/promotions"
-              className="border-b border-border py-3 text-sm font-medium uppercase tracking-wide text-accent-600"
+              className="border-b border-border py-3 text-sm font-medium uppercase tracking-wide text-brand-600"
               onClick={() => setOpen(false)}
             >
               Promotions

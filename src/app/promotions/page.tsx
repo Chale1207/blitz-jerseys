@@ -11,7 +11,7 @@ export default async function PromotionsPage() {
     <div>
       <section className="floodlight relative overflow-hidden bg-ink-900 py-10 text-white md:py-14">
         <div className="container-page">
-          <p className="text-xs font-semibold uppercase tracking-widest text-accent-400">
+          <p className="text-xs font-semibold uppercase tracking-widest text-brand-300">
             Limited Stock &middot; Last Season
           </p>
           <h1 className="mt-1 font-display text-4xl uppercase leading-[0.95] md:text-6xl">

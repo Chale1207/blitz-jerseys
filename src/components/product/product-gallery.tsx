@@ -56,7 +56,7 @@ export function ProductGallery({
               onClick={() => setActive(i)}
               aria-label={`Show image ${i + 1}`}
               className={`relative h-16 w-16 shrink-0 overflow-hidden rounded-lg bg-ink-900 ring-2 transition-colors ${
-                active === i ? "ring-accent-500" : "ring-white/10 hover:ring-white/30"
+                active === i ? "ring-brand-300" : "ring-white/10 hover:ring-white/30"
               }`}
             >
               <Image src={image.src} alt={image.alt} fill sizes="64px" className="object-contain p-1.5" />

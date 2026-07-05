@@ -156,7 +156,7 @@ export default function CustomOrderPage() {
 
         <button
           type="submit"
-          className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent-500 py-3.5 text-sm font-bold uppercase tracking-wide text-ink-900 shadow-accent transition-transform hover:scale-[1.01] hover:bg-accent-400 active:scale-95 sm:w-auto sm:px-8"
+          className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand-600 py-3.5 text-sm font-bold uppercase tracking-wide text-white shadow-brand transition-transform hover:scale-[1.01] hover:bg-brand-700 active:scale-95 sm:w-auto sm:px-8"
         >
           <MessageCircle className="h-5 w-5" /> Send Request on WhatsApp
         </button>

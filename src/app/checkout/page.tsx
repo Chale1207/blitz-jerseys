@@ -173,7 +173,7 @@ export default function CheckoutPage() {
           <button
             type="submit"
             disabled={submitting}
-            className="w-full rounded-full bg-accent-500 py-3.5 text-sm font-bold uppercase tracking-wide text-ink-900 shadow-accent transition-transform hover:scale-[1.01] hover:bg-accent-400 active:scale-95 disabled:opacity-60 disabled:shadow-none"
+            className="w-full rounded-full bg-brand-600 py-3.5 text-sm font-bold uppercase tracking-wide text-white shadow-brand transition-transform hover:scale-[1.01] hover:bg-brand-700 active:scale-95 disabled:opacity-60 disabled:shadow-none"
           >
             {submitting ? "Placing Order..." : "Place Order"}
           </button>

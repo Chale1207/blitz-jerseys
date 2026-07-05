@@ -53,7 +53,7 @@ export function Footer() {
         <div>
           <p className="text-sm font-semibold uppercase tracking-wide text-white/50">Shop</p>
           <ul className="mt-4 space-y-2 text-sm text-white/80">
-            <li><Link href="/promotions" className="text-accent-400 hover:text-accent-300">Promotions</Link></li>
+            <li><Link href="/promotions" className="text-brand-300 hover:text-brand-100">Promotions</Link></li>
             <li><Link href="/shop/premier-league" className="hover:text-brand-300">Premier League</Link></li>
             <li><Link href="/shop/serie-a" className="hover:text-brand-300">Serie A</Link></li>
             <li><Link href="/shop/la-liga" className="hover:text-brand-300">LaLiga</Link></li>
