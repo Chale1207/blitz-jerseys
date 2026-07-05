@@ -37,7 +37,7 @@ export function ProductGallery({
 
   return (
     <div>
-      <div className="relative aspect-square overflow-hidden rounded-3xl bg-surface-muted">
+      <div className="floodlight relative aspect-square overflow-hidden rounded-3xl bg-surface-muted">
         <div className="absolute inset-x-0 bottom-0 h-2.5 bg-gradient-to-r from-brand-900 via-brand-500 to-brand-300" />
         <Image
           src={images[active].src}
