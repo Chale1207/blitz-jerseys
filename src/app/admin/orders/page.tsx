@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { StatusSelect } from "./status-select";
 
 export const metadata = { title: "Orders — Admin" };
 
@@ -45,9 +46,7 @@ export default async function OrdersPage() {
                   </td>
                   <td className="px-4 py-3 text-right font-semibold text-ink-900">K{o.total}</td>
                   <td className="px-4 py-3 text-right">
-                    <span className="inline-flex rounded-full bg-brand-50 px-2 py-0.5 text-xs font-semibold capitalize text-brand-700">
-                      {o.status}
-                    </span>
+                    <StatusSelect id={o.id} status={o.status} />
                   </td>
                   <td className="px-4 py-3 text-right text-xs text-muted">
                     {new Date(o.createdAt).toLocaleDateString("en-GB", {
