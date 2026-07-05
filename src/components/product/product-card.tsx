@@ -23,9 +23,9 @@ export function ProductCard({ product }: { product: CardProduct }) {
   return (
     <Link
       href={`/product/${product.slug}`}
-      className="group block overflow-hidden rounded-2xl border border-border bg-surface shadow-brand transition-shadow duration-200 hover:shadow-brand-lg"
+      className="group block overflow-hidden rounded-2xl border border-brand-500/20 bg-surface shadow-brand transition-shadow duration-200 hover:shadow-brand-lg"
     >
-      <div className="shine-sweep relative aspect-[4/5] overflow-hidden bg-surface-muted p-6">
+      <div className="shine-sweep relative aspect-[4/5] overflow-hidden bg-brand-50 p-6">
         {images ? (
           <Image
             src={images[0].src}
@@ -57,7 +57,7 @@ export function ProductCard({ product }: { product: CardProduct }) {
         ) : null}
       </div>
       <div className="p-4">
-        <p className="text-xs font-semibold uppercase tracking-wide text-muted">
+        <p className="text-xs font-semibold uppercase tracking-wide text-brand-600">
           {product.team.name}
         </p>
         <h3 className="mt-1 text-base font-semibold text-ink-900">
