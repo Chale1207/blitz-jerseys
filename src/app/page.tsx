@@ -82,7 +82,7 @@ export default async function Home() {
             <Link
               key={league.slug}
               href={`/shop/${league.slug}`}
-              className="group relative overflow-hidden rounded-2xl bg-ink-900 px-10 py-12 text-white transition-transform duration-200 hover:-translate-y-1 hover:shadow-brand-lg"
+              className="hover-glow group relative overflow-hidden rounded-2xl bg-ink-900 px-10 py-12 text-white transition-transform duration-200 hover:-translate-y-1"
             >
               <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-brand-300">
                 {league.country}

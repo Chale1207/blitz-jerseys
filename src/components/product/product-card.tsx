@@ -23,7 +23,7 @@ export function ProductCard({ product }: { product: CardProduct }) {
   return (
     <Link
       href={`/product/${product.slug}`}
-      className="group block overflow-hidden rounded-2xl bg-surface shadow-brand transition-all duration-200 hover:-translate-y-1 hover:shadow-brand-lg"
+      className="hover-glow group block overflow-hidden rounded-2xl bg-surface shadow-brand transition-all duration-200 hover:-translate-y-1"
     >
       <div className="shine-sweep relative aspect-[4/5] overflow-hidden bg-surface-muted">
         {images ? (
