@@ -17,10 +17,10 @@ const CLUBS = [
 ];
 
 const LIFESTYLE_PHOTOS = [
-  { src: "/images/hero/lifestyle-1.jpeg", alt: "Blitz Jerseys crew wearing match-night kits" },
-  { src: "/images/hero/lifestyle-2.jpeg", alt: "Fan wearing a red home kit on the street" },
-  { src: "/images/hero/lifestyle-3.jpeg", alt: "Fan wearing a green and gold kit" },
-  { src: "/images/hero/lifestyle-4.jpeg", alt: "Two fans wearing blue kits" },
+  { src: "/images/filler/filler-03.jpeg", alt: "Fan in Manchester United retro kit" },
+  { src: "/images/filler/filler-14.jpeg", alt: "Fan in Liverpool Standard Chartered kit" },
+  { src: "/images/filler/filler-16.jpeg", alt: "Fan in Jamaica national kit" },
+  { src: "/images/filler/filler-20.jpeg", alt: "Fan in Chelsea home kit" },
 ];
 
 // Server and first client render both assume mobile, so hydration always
@@ -53,19 +53,19 @@ function PhotoCard({
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.15 + index * 0.1, ease: easeOut }}
+      initial={{ opacity: 0, scale: 0.78, y: 30 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      transition={{ duration: 0.75, delay: 0.3 + index * 0.2, ease: easeOut }}
       className={className}
     >
       <motion.div
-        animate={reduceMotion ? undefined : { y: [0, -8, 0] }}
+        animate={reduceMotion ? undefined : { y: [0, -14, 0] }}
         transition={
           reduceMotion
             ? undefined
-            : { duration: 3.6 + index * 0.4, repeat: Infinity, ease: "easeInOut", delay: index * 0.3 }
+            : { duration: 3.2 + index * 0.5, repeat: Infinity, ease: "easeInOut", delay: index * 0.4 }
         }
-        className="h-full w-full"
+        className="relative h-full w-full"
       >
         <Image src={photo.src} alt={photo.alt} fill sizes="(min-width: 768px) 22vw, 40vw" className="object-cover" priority />
       </motion.div>
@@ -89,7 +89,7 @@ export function Hero() {
           <span className="inline-flex items-center rounded-full bg-brand-500/20 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-brand-300">
             2026/27 Season Kits
           </span>
-          <h1 className="mt-5 text-4xl font-normal leading-[0.95] md:text-6xl lg:text-7xl">
+          <h1 className="mt-5 text-4xl font-normal leading-[1.05] tracking-[0.03em] md:text-6xl lg:text-7xl">
             <motion.span
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -102,12 +102,12 @@ export function Hero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3, ease: easeOut }}
-              className="text-shine block"
+              className="text-shine block mt-1"
             >
               Own the Night.
             </motion.span>
           </h1>
-          <p className="mt-5 max-w-md font-head text-base text-white/70 md:text-lg">
+          <p className="mt-6 max-w-md font-head text-base leading-relaxed tracking-wide text-white/75 md:text-lg">
             Performance jerseys inspired by the Premier League, Serie A, and
             LaLiga&apos;s biggest clubs. Order in seconds, confirm on WhatsApp.
           </p>

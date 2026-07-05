@@ -63,6 +63,7 @@ export default function CustomOrderPage() {
               id="whatsapp"
               type="tel"
               required
+              placeholder="+260 968 000 000"
               value={form.whatsapp}
               onChange={(e) => setForm({ ...form, whatsapp: e.target.value })}
               className="mt-1.5 w-full rounded-lg border border-border px-4 py-3 text-sm outline-none focus:border-brand-500"

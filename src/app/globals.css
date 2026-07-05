@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fbf9f3;
+  --background: #ebfaf7;
   --foreground: #0d1414;
 
   /* Brand: matched to the real Blitz Jerseys logo's teal */
@@ -24,11 +24,11 @@
   --color-ink-800: #121b1a;
   --color-ink-700: #1a2624;
 
-  /* Warm chalk surfaces, not clinical white */
-  --color-surface: #fbf9f3;
-  --color-surface-muted: #f1ede1;
-  --color-muted: #666f68;
-  --color-border: #e3ded0;
+  /* Teal-tinted surfaces */
+  --color-surface: #ffffff;
+  --color-surface-muted: #dff5f1;
+  --color-muted: #4a6b67;
+  --color-border: #b8e0db;
 
   --color-danger: #c8102e;
   --color-success: #1f8a4c;
@@ -70,7 +70,7 @@
      and button lift should read as Blitz, not a template default. */
   --shadow-brand: 0 8px 20px -6px color-mix(in srgb, var(--color-brand-500) 35%, transparent);
   --shadow-brand-lg: 0 20px 42px -10px color-mix(in srgb, var(--color-brand-500) 45%, transparent);
-  --shadow-glow: 0 0 32px 8px color-mix(in srgb, var(--color-brand-300) 30%, transparent);
+  --shadow-glow: 0 0 18px 3px color-mix(in srgb, var(--color-brand-300) 18%, transparent);
   --shadow-accent: 0 10px 26px -6px color-mix(in srgb, var(--color-accent-500) 50%, transparent);
 }
 
@@ -132,6 +132,13 @@ h1,
   }
 }
 
+/* Lifestyle photo strip — same principle as ticker but slower, image-sized. */
+@media (prefers-reduced-motion: no-preference) {
+  .photo-strip-track {
+    animation: ticker-scroll 55s linear infinite;
+  }
+}
+
 /* Universal hover glow — symmetric brand radial emanating from the element
    centre. Apply .hover-glow to any card or block that should feel alive. */
 .hover-glow {
@@ -166,6 +173,26 @@ h1,
 
 @media (prefers-reduced-motion: reduce) {
   .hover-glow::after { transition: none; }
+}
+
+/* Glossy pill button — layered gradient gives an iOS-style convex sheen. */
+.glossy {
+  position: relative;
+  overflow: hidden;
+}
+
+.glossy::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.45) 0%,
+    rgba(255, 255, 255, 0.12) 45%,
+    rgba(0, 0, 0, 0.08) 100%
+  );
+  border-radius: inherit;
+  pointer-events: none;
 }
 
 /* Product card hover: a single diagonal floodlight sweep, not a generic
@@ -219,8 +246,6 @@ input:focus-visible,
   *,
   *::before,
   *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }

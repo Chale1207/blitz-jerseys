@@ -34,7 +34,7 @@ export function FloatingShopBtn() {
     >
       <Link
         href="/shop"
-        className="hover-glow inline-flex items-center gap-2 rounded-full bg-brand-500 px-5 py-3 text-sm font-bold uppercase tracking-wide text-white shadow-brand-lg transition-transform duration-200 hover:scale-105 hover:bg-brand-600 active:scale-95"
+        className="glossy hover-glow inline-flex items-center gap-2 rounded-full bg-brand-500 px-5 py-3 text-sm font-bold uppercase tracking-wide text-white shadow-brand-lg transition-transform duration-200 hover:scale-105 hover:bg-brand-600 active:scale-95"
       >
         <ShoppingBag className="h-4 w-4" />
         Shop Now

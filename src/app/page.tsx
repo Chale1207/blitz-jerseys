@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ShieldCheck, MessageCircle, Truck } from "lucide-react";
 import { Hero } from "@/components/home/hero";
 import { ProductCard } from "@/components/product/product-card";
@@ -116,6 +117,43 @@ export default async function Home() {
           >
             Start a Custom Order
           </Link>
+        </div>
+      </section>
+
+      {/* Lifestyle photo strip — auto-scrolling ticker */}
+      <section className="overflow-hidden border-y border-border py-10">
+        <div className="photo-strip-track flex w-max gap-4">
+          {[
+            { src: "/images/filler/filler-02.jpeg", alt: "Fans in Manchester United kits" },
+            { src: "/images/filler/filler-01.jpeg", alt: "Fans in Manchester United kits seated" },
+            { src: "/images/filler/filler-06.jpeg", alt: "Fans showing off their kits" },
+            { src: "/images/filler/filler-08.jpeg", alt: "Full kit lineup group shot" },
+            { src: "/images/filler/filler-09.jpeg", alt: "Fans in Real Madrid kits" },
+            { src: "/images/filler/filler-11.jpeg", alt: "Real Madrid fans group" },
+            { src: "/images/filler/filler-07.jpeg", alt: "Fans holding up a jersey" },
+            { src: "/images/filler/filler-05.jpeg", alt: "Fans in a variety of kits" },
+            { src: "/images/filler/filler-02.jpeg", alt: "Fans in Manchester United kits" },
+            { src: "/images/filler/filler-01.jpeg", alt: "Fans in Manchester United kits seated" },
+            { src: "/images/filler/filler-06.jpeg", alt: "Fans showing off their kits" },
+            { src: "/images/filler/filler-08.jpeg", alt: "Full kit lineup group shot" },
+            { src: "/images/filler/filler-09.jpeg", alt: "Fans in Real Madrid kits" },
+            { src: "/images/filler/filler-11.jpeg", alt: "Real Madrid fans group" },
+            { src: "/images/filler/filler-07.jpeg", alt: "Fans holding up a jersey" },
+            { src: "/images/filler/filler-05.jpeg", alt: "Fans in a variety of kits" },
+          ].map((photo, i) => (
+            <div
+              key={i}
+              className="relative aspect-[3/4] w-48 shrink-0 overflow-hidden rounded-2xl sm:w-56"
+            >
+              <Image
+                src={photo.src}
+                alt={photo.alt}
+                fill
+                sizes="224px"
+                className="object-cover"
+              />
+            </div>
+          ))}
         </div>
       </section>
 
