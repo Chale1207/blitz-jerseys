@@ -2,6 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { StatusSelect } from "./status-select";
 
 export const metadata = { title: "Orders — Admin" };
+export const dynamic = "force-dynamic";
 
 export default async function OrdersPage() {
   const orders = await prisma.order.findMany({

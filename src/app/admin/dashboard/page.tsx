@@ -1,8 +1,10 @@
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { ShoppingBag, ClipboardList, Tag, TrendingUp } from "lucide-react";
+import { OrderStatusBadge } from "@/components/order-status-badge";
 
 export const metadata = { title: "Dashboard — Admin" };
+export const dynamic = "force-dynamic";
 
 export default async function DashboardPage() {
   const [productCount, orderCount, featuredCount, saleCount] = await Promise.all([
@@ -72,9 +74,7 @@ export default async function DashboardPage() {
                     <td className="px-4 py-3 text-muted">{o.items.length}</td>
                     <td className="px-4 py-3 text-right font-semibold text-ink-900">K{o.total}</td>
                     <td className="px-4 py-3 text-right">
-                      <span className="inline-flex rounded-full bg-brand-50 px-2 py-0.5 text-xs font-semibold capitalize text-brand-700">
-                        {o.status}
-                      </span>
+                      <OrderStatusBadge status={o.status} />
                     </td>
                   </tr>
                 ))}

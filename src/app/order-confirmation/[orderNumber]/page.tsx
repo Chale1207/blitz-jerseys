@@ -4,6 +4,9 @@ import { MessageCircle } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { formatPrice } from "@/lib/format";
 import { buildOrderWhatsAppLink } from "@/lib/whatsapp";
+import { OrderStatusBadge } from "@/components/order-status-badge";
+
+export const dynamic = "force-dynamic";
 
 export default async function OrderConfirmationPage({
   params,
@@ -36,9 +39,7 @@ export default async function OrderConfirmationPage({
 
   return (
     <div className="container-page flex flex-col items-center py-16 text-center">
-      <span className="rounded-full bg-brand-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-brand-600">
-        Order Received
-      </span>
+      <OrderStatusBadge status={order.status} />
       <h1 className="mt-4 font-display text-3xl font-bold uppercase text-ink-900 md:text-4xl">
         Thanks, {order.customerName.split(" ")[0]}!
       </h1>
@@ -46,6 +47,13 @@ export default async function OrderConfirmationPage({
         Your order <span className="font-semibold text-ink-900">{order.orderNumber}</span> has
         been saved. Tap below to send us your order on WhatsApp so we can confirm sizes, delivery
         cost, and timing.
+      </p>
+      <p className="mt-1 text-xs text-muted">
+        Bookmark this page or save your order number — you can check your order status anytime at{" "}
+        <Link href="/track-order" className="font-semibold text-brand-600 hover:text-brand-700">
+          Track Order
+        </Link>
+        .
       </p>
 
       <a

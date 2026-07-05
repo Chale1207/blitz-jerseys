@@ -5,6 +5,7 @@ import { toggleFeatured, toggleOnSale } from "./actions";
 import { DeleteButton } from "./delete-button";
 
 export const metadata = { title: "Products — Admin" };
+export const dynamic = "force-dynamic";
 
 export default async function ProductsPage() {
   const products = await prisma.product.findMany({

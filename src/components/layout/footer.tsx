@@ -76,6 +76,7 @@ export function Footer() {
               </a>
             </li>
             <li><Link href="/contact" className="hover:text-brand-300">Contact Page</Link></li>
+            <li><Link href="/track-order" className="hover:text-brand-300">Track Order</Link></li>
             <li><Link href="/about" className="hover:text-brand-300">About Blitz</Link></li>
           </ul>
         </div>
