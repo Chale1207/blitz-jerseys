@@ -38,7 +38,7 @@ export default function CheckoutPage() {
         </h1>
         <Link
           href="/shop"
-          className="mt-6 inline-flex rounded-full bg-brand-500 px-7 py-3 text-sm font-bold uppercase tracking-wide text-white shadow-brand"
+          className="hover-glow mt-6 inline-flex rounded-full bg-brand-500 px-7 py-3 text-sm font-bold uppercase tracking-wide text-white shadow-brand"
         >
           Shop Kits
         </Link>
@@ -173,7 +173,7 @@ export default function CheckoutPage() {
           <button
             type="submit"
             disabled={submitting}
-            className="w-full rounded-full bg-brand-600 py-3.5 text-sm font-bold uppercase tracking-wide text-white shadow-brand transition-transform hover:scale-[1.01] hover:bg-brand-700 active:scale-95 disabled:opacity-60 disabled:shadow-none"
+            className="hover-glow w-full rounded-full bg-brand-600 py-3.5 text-sm font-bold uppercase tracking-wide text-white shadow-brand transition-transform hover:scale-[1.01] hover:bg-brand-700 active:scale-95 disabled:opacity-60 disabled:shadow-none"
           >
             {submitting ? "Placing Order..." : "Place Order"}
           </button>

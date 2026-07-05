@@ -27,7 +27,7 @@ export default function CartPage() {
         <p className="mt-2 text-sm text-muted">Pick a kit and get in the game.</p>
         <Link
           href="/shop"
-          className="mt-6 inline-flex rounded-full bg-brand-500 px-7 py-3 text-sm font-bold uppercase tracking-wide text-white shadow-brand transition-transform hover:scale-105"
+          className="hover-glow mt-6 inline-flex rounded-full bg-brand-500 px-7 py-3 text-sm font-bold uppercase tracking-wide text-white shadow-brand transition-transform hover:scale-105"
         >
           Shop Kits
         </Link>
@@ -116,7 +116,7 @@ export default function CartPage() {
           </p>
           <Link
             href="/checkout"
-            className="mt-6 block rounded-full bg-brand-600 py-3.5 text-center text-sm font-bold uppercase tracking-wide text-white shadow-brand transition-transform hover:scale-[1.02] hover:bg-brand-700 active:scale-95"
+            className="hover-glow mt-6 block rounded-full bg-brand-600 py-3.5 text-center text-sm font-bold uppercase tracking-wide text-white shadow-brand transition-transform hover:scale-[1.02] hover:bg-brand-700 active:scale-95"
           >
             Checkout
           </Link>

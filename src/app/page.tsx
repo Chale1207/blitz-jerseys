@@ -58,7 +58,7 @@ export default async function Home() {
             </div>
             <Link
               href="/promotions"
-              className="inline-flex shrink-0 items-center justify-center rounded-full bg-white px-7 py-3.5 text-sm font-bold uppercase tracking-wide text-brand-900 transition-transform duration-200 hover:scale-105 active:scale-95"
+              className="hover-glow inline-flex shrink-0 items-center justify-center rounded-full bg-white px-7 py-3.5 text-sm font-bold uppercase tracking-wide text-brand-900 transition-transform duration-200 hover:scale-105 active:scale-95"
             >
               Shop Promotions
             </Link>
@@ -112,7 +112,7 @@ export default async function Home() {
           </p>
           <Link
             href="/custom-order"
-            className="mt-2 inline-flex items-center justify-center rounded-full bg-brand-300 px-7 py-3.5 text-sm font-bold uppercase tracking-wide text-brand-900 shadow-brand transition-transform duration-200 hover:scale-105 hover:bg-brand-100 active:scale-95"
+            className="hover-glow mt-2 inline-flex items-center justify-center rounded-full bg-brand-300 px-7 py-3.5 text-sm font-bold uppercase tracking-wide text-brand-900 shadow-brand transition-transform duration-200 hover:scale-105 hover:bg-brand-100 active:scale-95"
           >
             Start a Custom Order
           </Link>
