@@ -3,6 +3,7 @@ import { Anton, Oswald, Archivo } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
+import { FloatingShopBtn } from "@/components/layout/floating-shop-btn";
 
 const anton = Anton({
   variable: "--font-anton",
@@ -70,6 +71,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <Navbar />
         <main className="flex-1">{children}</main>
+        <FloatingShopBtn />
         <Footer />
       </body>
     </html>
