@@ -23,16 +23,16 @@ export function ProductCard({ product }: { product: CardProduct }) {
   return (
     <Link
       href={`/product/${product.slug}`}
-      className="group block overflow-hidden rounded-2xl border border-brand-500/20 bg-surface shadow-brand transition-shadow duration-200 hover:shadow-brand-lg"
+      className="group block overflow-hidden rounded-2xl bg-surface shadow-brand transition-all duration-200 hover:-translate-y-1 hover:shadow-brand-lg"
     >
-      <div className="shine-sweep relative aspect-[4/5] overflow-hidden bg-brand-50 p-6">
+      <div className="shine-sweep relative aspect-[4/5] overflow-hidden bg-surface-muted">
         {images ? (
           <Image
             src={images[0].src}
             alt={images[0].alt}
             fill
             sizes="(min-width: 1024px) 22vw, (min-width: 640px) 45vw, 90vw"
-            className="object-contain p-4 transition-transform duration-300 ease-out group-hover:scale-105"
+            className="object-contain p-3 transition-transform duration-300 ease-out group-hover:scale-105"
           />
         ) : (
           <JerseyArt
@@ -56,14 +56,15 @@ export function ProductCard({ product }: { product: CardProduct }) {
           </span>
         ) : null}
       </div>
+      <div className="h-[3px] bg-gradient-to-r from-brand-900 via-brand-500 to-brand-300" />
       <div className="p-4">
-        <p className="text-xs font-semibold uppercase tracking-wide text-brand-600">
+        <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-brand-600">
           {product.team.name}
         </p>
-        <h3 className="mt-1 text-base font-semibold text-ink-900">
+        <h3 className="mt-1 font-head text-lg font-bold uppercase leading-tight text-ink-900">
           {product.name} {product.season}
         </h3>
-        <p className="mt-2 font-head text-lg font-bold text-brand-600">
+        <p className="mt-3 font-head text-xl font-bold text-brand-600">
           {formatPrice(product.price)}
         </p>
       </div>
