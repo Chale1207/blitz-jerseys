@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Anton, Oswald, Archivo } from "next/font/google";
 import "./globals.css";
 import { SiteChrome } from "@/components/layout/site-chrome";
+import { Navbar } from "@/components/layout/navbar";
 
 const anton = Anton({
   variable: "--font-anton",
@@ -67,7 +68,7 @@ export default function RootLayout({
       className={`${anton.variable} ${oswald.variable} ${archivo.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
-        <SiteChrome>{children}</SiteChrome>
+        <SiteChrome navbar={<Navbar />}>{children}</SiteChrome>
       </body>
     </html>
   );

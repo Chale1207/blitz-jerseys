@@ -1,11 +1,16 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { Navbar } from "./navbar";
 import { Footer } from "./footer";
 import { FloatingShopBtn } from "./floating-shop-btn";
 
-export function SiteChrome({ children }: { children: React.ReactNode }) {
+export function SiteChrome({
+  children,
+  navbar,
+}: {
+  children: React.ReactNode;
+  navbar: React.ReactNode;
+}) {
   const pathname = usePathname();
   const isAdmin = pathname.startsWith("/admin");
 
@@ -15,7 +20,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      <Navbar />
+      {navbar}
       <main className="flex-1">{children}</main>
       <FloatingShopBtn />
       <Footer />
