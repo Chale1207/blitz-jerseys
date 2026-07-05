@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Plus, Trash2 } from "lucide-react";
+import { ImageUploader } from "@/components/admin/image-uploader";
 
 type Team = { id: string; name: string; league: { name: string } };
 type Variant = { size: string; stock: number };
@@ -31,6 +32,12 @@ export function ProductForm({
 }) {
   const [variants, setVariants] = useState<Variant[]>(
     defaultValues?.variants ?? DEFAULT_SIZES.map((size) => ({ size, stock: 10 }))
+  );
+
+  const [imageUrls, setImageUrls] = useState<string[]>(
+    defaultValues?.imageUrls
+      ? defaultValues.imageUrls.split("\n").map((u) => u.trim()).filter(Boolean)
+      : []
   );
 
   function addVariant() {
@@ -131,19 +138,24 @@ export function ProductForm({
         </label>
       </div>
 
-      {/* Image URLs */}
+      {/* Images */}
       <div>
-        <label className="admin-label">Image URLs (one per line)</label>
-        <textarea
-          name="imageUrls"
-          rows={4}
-          defaultValue={defaultValues?.imageUrls ?? ""}
-          placeholder={"/images/filler/filler-01.jpeg\nhttps://res.cloudinary.com/…"}
-          className="admin-input resize-none font-mono text-xs"
-        />
-        <p className="mt-1 text-xs text-muted">
-          Use paths like <code className="rounded bg-surface-muted px-1">/images/filler/filler-01.jpeg</code> or paste any public image URL.
+        <label className="admin-label">Product images</label>
+        <ImageUploader urls={imageUrls} onChange={setImageUrls} />
+        {/* Hidden field — serialises URLs for the server action */}
+        <input type="hidden" name="imageUrls" value={imageUrls.join("\n")} />
+        <p className="mt-2 text-xs text-muted">
+          Drag &amp; drop or click to upload. You can also type URLs below — one per line.
         </p>
+        <textarea
+          rows={2}
+          placeholder="/images/filler/filler-01.jpeg"
+          className="admin-input mt-1 resize-none font-mono text-xs"
+          value={imageUrls.join("\n")}
+          onChange={(e) =>
+            setImageUrls(e.target.value.split("\n").map((u) => u.trim()).filter(Boolean))
+          }
+        />
       </div>
 
       {/* Variants */}
