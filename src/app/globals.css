@@ -32,6 +32,11 @@
 
   --color-danger: #c8102e;
   --color-success: #1f8a4c;
+
+  /* shadcn/ui convention: primary maps to the brand teal so ui/ components
+     (e.g. order-state) read on-brand without per-component overrides. */
+  --color-primary: var(--color-brand-500);
+  --color-primary-foreground: #ffffff;
 }
 
 @theme inline {
@@ -61,6 +66,9 @@
   --color-border: var(--color-border);
   --color-danger: var(--color-danger);
   --color-success: var(--color-success);
+
+  --color-primary: var(--color-primary);
+  --color-primary-foreground: var(--color-primary-foreground);
 
   --font-display: var(--font-anton);
   --font-head: var(--font-oswald);

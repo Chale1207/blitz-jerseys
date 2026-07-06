@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { MessageCircle } from "lucide-react";
+import { MessageCircle, ShoppingCart, CheckCircle2 } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { formatPrice } from "@/lib/format";
 import { buildOrderWhatsAppLink } from "@/lib/whatsapp";
 import { OrderStatusBadge } from "@/components/order-status-badge";
 import { ORDER_STATUS_LABELS, ORDER_STATUS_MESSAGES } from "@/lib/order-status";
+import { OrderState } from "@/components/ui/order-state";
 
 export const dynamic = "force-dynamic";
 
@@ -41,6 +42,23 @@ export default async function OrderConfirmationPage({
   const copy = ORDER_STATUS_MESSAGES[order.status] ?? ORDER_STATUS_MESSAGES.pending;
   const firstName = order.customerName.split(" ")[0];
 
+  // Only two forward steps are real for us today — we don't track packing/
+  // shipping yet, so we don't invent stages the business can't actually confirm.
+  const orderSteps = [
+    {
+      status: "Order Placed",
+      icon: <ShoppingCart className="h-4 w-4" />,
+      description: "We've received your order",
+      isActive: order.status === "pending" || order.status === "confirmed",
+    },
+    {
+      status: "Confirmed",
+      icon: <CheckCircle2 className="h-4 w-4" />,
+      description: "Sizes and delivery confirmed on WhatsApp",
+      isActive: order.status === "confirmed",
+    },
+  ];
+
   return (
     <div className="container-page flex flex-col items-center py-16 text-center">
       <OrderStatusBadge status={order.status} label={ORDER_STATUS_LABELS[order.status]} />
@@ -66,6 +84,12 @@ export default async function OrderConfirmationPage({
       >
         <MessageCircle className="h-5 w-5" /> {copy.whatsappLabel}
       </a>
+
+      {order.status !== "cancelled" && (
+        <div className="mt-10 w-full max-w-md">
+          <OrderState states={orderSteps} className="md:grid-cols-2 lg:grid-cols-2" />
+        </div>
+      )}
 
       <div className="mt-10 w-full max-w-md rounded-2xl border border-border bg-surface p-6 text-left shadow-brand">
         <h2 className="text-sm font-bold uppercase tracking-wide text-ink-900">
