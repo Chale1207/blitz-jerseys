@@ -5,9 +5,11 @@ import { NextRequest } from "next/server";
 export const ADMIN_COOKIE = "blitz-admin";
 
 function getSecret() {
-  return new TextEncoder().encode(
-    process.env.ADMIN_JWT_SECRET ?? "dev-secret-change-in-production"
-  );
+  const secret = process.env.ADMIN_JWT_SECRET;
+  if (!secret) {
+    throw new Error("ADMIN_JWT_SECRET environment variable is not set");
+  }
+  return new TextEncoder().encode(secret);
 }
 
 export async function signAdminToken() {
