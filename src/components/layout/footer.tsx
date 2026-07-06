@@ -27,6 +27,7 @@ export function Footer() {
             alt="Blitz Jerseys"
             width={405}
             height={200}
+            sizes="120px"
             className="h-9 w-auto"
           />
           <p className="mt-3 max-w-sm text-sm text-white/70">

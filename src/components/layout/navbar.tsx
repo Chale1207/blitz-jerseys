@@ -20,6 +20,7 @@ export async function Navbar() {
             width={405}
             height={200}
             priority
+            sizes="120px"
             className="h-8 w-auto md:h-10"
           />
         </Link>
