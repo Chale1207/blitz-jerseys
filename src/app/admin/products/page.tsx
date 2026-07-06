@@ -35,7 +35,8 @@ export default async function ProductsPage() {
             </Link>
           </div>
         ) : (
-          <table className="w-full text-sm">
+          <div className="overflow-x-auto">
+          <table className="w-full min-w-[720px] text-sm">
             <thead className="border-b border-border bg-surface-muted">
               <tr>
                 <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-muted">Kit</th>
@@ -99,6 +100,7 @@ export default async function ProductsPage() {
               })}
             </tbody>
           </table>
+          </div>
         )}
       </div>
     </div>

@@ -56,7 +56,8 @@ export default async function DashboardPage() {
           {recentOrders.length === 0 ? (
             <p className="p-6 text-sm text-muted">No orders yet.</p>
           ) : (
-            <table className="w-full text-sm">
+            <div className="overflow-x-auto">
+            <table className="w-full min-w-[560px] text-sm">
               <thead className="border-b border-border bg-surface-muted">
                 <tr>
                   <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-muted">Order</th>
@@ -80,6 +81,7 @@ export default async function DashboardPage() {
                 ))}
               </tbody>
             </table>
+            </div>
           )}
         </div>
       </div>
