@@ -1,29 +1,45 @@
 "use client";
 
-import { useTransition } from "react";
+import { useState, useTransition } from "react";
+import { toast } from "sonner";
 import { updateOrderStatus } from "./actions";
-import { ORDER_STATUS_STYLES } from "@/lib/order-status";
+import { ORDER_STATUSES, ORDER_STATUS_STYLES, ORDER_STATUS_LABELS } from "@/lib/order-status";
+import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
 
 export function StatusSelect({ id, status }: { id: string; status: string }) {
+  const [current, setCurrent] = useState(status);
   const [isPending, startTransition] = useTransition();
 
   return (
-    <select
-      defaultValue={status}
+    <Select
+      value={current}
       disabled={isPending}
-      onChange={(e) => {
-        const next = e.target.value;
-        startTransition(() => {
-          updateOrderStatus(id, next);
+      onValueChange={(next) => {
+        const previous = current;
+        setCurrent(next);
+        startTransition(async () => {
+          try {
+            await updateOrderStatus(id, next);
+            toast.success(`Order marked ${ORDER_STATUS_LABELS[next]?.toLowerCase() ?? next}`);
+          } catch {
+            setCurrent(previous);
+            toast.error("Couldn't update order status — try again.");
+          }
         });
       }}
-      className={`rounded-full border-0 px-2.5 py-1 text-xs font-semibold capitalize outline-none disabled:opacity-50 ${
-        ORDER_STATUS_STYLES[status] ?? "bg-surface-muted text-muted"
-      }`}
     >
-      <option value="pending">Pending</option>
-      <option value="confirmed">Confirmed</option>
-      <option value="cancelled">Cancelled</option>
-    </select>
+      <SelectTrigger
+        className={`${ORDER_STATUS_STYLES[current] ?? "bg-surface-muted text-muted"}`}
+      >
+        <SelectValue>{ORDER_STATUS_LABELS[current] ?? current}</SelectValue>
+      </SelectTrigger>
+      <SelectContent align="end">
+        {ORDER_STATUSES.map((s) => (
+          <SelectItem key={s} value={s}>
+            {ORDER_STATUS_LABELS[s]}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
   );
 }

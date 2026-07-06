@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { MessageCircle, ShoppingCart, CheckCircle2 } from "lucide-react";
+import { MessageCircle, ShoppingCart, CheckCircle2, Truck, PackageCheck } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { formatPrice } from "@/lib/format";
 import { buildOrderWhatsAppLink } from "@/lib/whatsapp";
@@ -42,20 +42,39 @@ export default async function OrderConfirmationPage({
   const copy = ORDER_STATUS_MESSAGES[order.status] ?? ORDER_STATUS_MESSAGES.pending;
   const firstName = order.customerName.split(" ")[0];
 
-  // Only two forward steps are real for us today — we don't track packing/
-  // shipping yet, so we don't invent stages the business can't actually confirm.
+  const STATUS_STEP_INDEX: Record<string, number> = {
+    pending: 0,
+    confirmed: 1,
+    courier_assigned: 2,
+    courier_shared: 3,
+    delivered: 4,
+  };
+  const statusIndex = STATUS_STEP_INDEX[order.status] ?? 0;
+
   const orderSteps = [
     {
       status: "Order Placed",
       icon: <ShoppingCart className="h-4 w-4" />,
       description: "We've received your order",
-      isActive: order.status === "pending" || order.status === "confirmed",
+      isActive: statusIndex >= 0,
     },
     {
       status: "Confirmed",
       icon: <CheckCircle2 className="h-4 w-4" />,
       description: "Sizes and delivery confirmed on WhatsApp",
-      isActive: order.status === "confirmed",
+      isActive: statusIndex >= 1,
+    },
+    {
+      status: "With Courier",
+      icon: <Truck className="h-4 w-4" />,
+      description: statusIndex >= 3 ? "Courier details shared with you" : "Handed to our courier",
+      isActive: statusIndex >= 2,
+    },
+    {
+      status: "Delivered",
+      icon: <PackageCheck className="h-4 w-4" />,
+      description: "Enjoy the kit!",
+      isActive: statusIndex >= 4,
     },
   ];
 
@@ -86,10 +105,10 @@ export default async function OrderConfirmationPage({
       </a>
 
       {order.status !== "cancelled" && (
-        <div className="mt-10 w-full max-w-md">
+        <div className="mt-10 w-full max-w-xl">
           <OrderState
             states={orderSteps}
-            className="grid-cols-2 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-2"
+            className="grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 2xl:grid-cols-4"
           />
         </div>
       )}

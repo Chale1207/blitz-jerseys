@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { LayoutDashboard, ShoppingBag, ClipboardList, LogOut, Menu, X } from "lucide-react";
+import { Toaster } from "sonner";
 import { logoutAction } from "./login/actions";
 
 const NAV = [
@@ -20,6 +21,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   return (
     <div className="flex min-h-screen bg-[#f0faf8]">
+      <Toaster position="top-right" richColors closeButton />
+
       {/* Mobile top bar */}
       <div className="fixed inset-x-0 top-0 z-30 flex items-center justify-between bg-ink-900 px-4 py-3 md:hidden">
         <div>
