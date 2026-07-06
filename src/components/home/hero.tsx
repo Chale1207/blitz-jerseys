@@ -113,9 +113,14 @@ export function Hero() {
       <div className="absolute inset-0 -z-10 bg-ink-900/60" />
       <div className="floodlight absolute inset-0 -z-10" aria-hidden />
 
-      <div className="container-page relative grid items-center gap-10 pb-10 pt-16 md:grid-cols-2 md:gap-10 md:pb-16 md:pt-24">
-        {/* Text column — always visible on SSR, no opacity-based initial */}
-        <div>
+      <div className="container-page relative grid grid-cols-1 items-center gap-10 pb-10 pt-16 md:grid-cols-2 md:gap-10 md:pb-16 md:pt-24">
+        {/* Text column — always visible on SSR, no opacity-based initial.
+            min-w-0 stops the grid item from being forced wider than its
+            track by the max-w-md paragraph below it — a classic CSS Grid
+            trap (items default to min-width:auto, not 0), which was
+            pushing this whole column ~76px past the real viewport edge
+            on narrow phones. */}
+        <div className="min-w-0">
           <span className="inline-flex items-center rounded-full bg-brand-500/20 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-brand-300">
             2026/27 Season Kits
           </span>
@@ -144,7 +149,7 @@ export function Hero() {
         </div>
 
         {/* Photo grid — always visible, photos pop-in via PhotoCard animations */}
-        <div className="relative mx-auto w-full max-w-md">
+        <div className="relative mx-auto w-full min-w-0 max-w-md">
           <AnimatePresence mode="wait" initial={false}>
             {showDesktop ? (
               <div key="desktop" className="grid grid-cols-2 gap-4">
