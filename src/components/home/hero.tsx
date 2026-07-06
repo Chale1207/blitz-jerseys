@@ -82,20 +82,21 @@ export function Hero() {
   const reduceMotion = Boolean(useReducedMotion());
   const showDesktop = mounted && isDesktop;
 
+  // Mount the <video> only after hydration so its network request never
+  // appears in the server HTML's preload scan — it stays out of the way of
+  // fonts/images/JS during the critical First Contentful Paint window. The
+  // poster frame (a regular optimized next/image) covers the gap instantly.
+  const [videoReady, setVideoReady] = useState(false);
+  useEffect(() => {
+    setVideoReady(true);
+  }, []);
+
   return (
     <section className="relative isolate overflow-hidden bg-ink-900 text-white">
       {/* Video background — paused/replaced with a still frame when the visitor
           prefers reduced motion, since a looping background video is exactly
           the kind of ambient motion that preference is meant to suppress. */}
-      {reduceMotion ? (
-        <Image
-          src="/images/filler/filler-08.jpeg"
-          alt="Blitz Jerseys fans in full kit"
-          fill
-          priority
-          className="absolute inset-0 -z-20 object-cover brightness-[0.4]"
-        />
-      ) : (
+      {!reduceMotion && videoReady ? (
         <video
           className="absolute inset-0 -z-20 h-full w-full object-cover brightness-[0.4]"
           src="/videos/blitz-theme.mp4"
@@ -104,6 +105,14 @@ export function Hero() {
           muted
           loop
           playsInline
+        />
+      ) : (
+        <Image
+          src="/images/filler/filler-08.jpeg"
+          alt="Blitz Jerseys fans in full kit"
+          fill
+          priority
+          className="absolute inset-0 -z-20 object-cover brightness-[0.4]"
         />
       )}
 

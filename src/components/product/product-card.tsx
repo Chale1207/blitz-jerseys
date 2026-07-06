@@ -44,18 +44,20 @@ export function ProductCard({ product }: { product: CardProduct }) {
             className="h-full w-full transition-transform duration-300 ease-out group-hover:scale-105"
           />
         )}
-        <span className="absolute left-3 top-3 rounded-full bg-ink-900/85 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
-          {product.team.league.name}
-        </span>
-        {!inStock ? (
-          <span className="absolute right-3 top-3 rounded-full bg-danger px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
-            Sold Out
+        <div className="absolute inset-x-2 top-2 flex items-start justify-between gap-1.5 sm:inset-x-3 sm:top-3">
+          <span className="min-w-0 truncate rounded-full bg-ink-900/85 px-2 py-1 text-[9px] font-semibold uppercase tracking-wide text-white sm:px-2.5 sm:text-[10px]">
+            {product.team.league.name}
           </span>
-        ) : product.onSale ? (
-          <span className="absolute right-3 top-3 rounded-full bg-brand-500 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-white shadow-brand">
-            Promo
-          </span>
-        ) : null}
+          {!inStock ? (
+            <span className="shrink-0 rounded-full bg-danger px-2 py-1 text-[9px] font-semibold uppercase tracking-wide text-white sm:px-2.5 sm:text-[10px]">
+              Sold Out
+            </span>
+          ) : product.onSale ? (
+            <span className="shrink-0 rounded-full bg-brand-500 px-2 py-1 text-[9px] font-semibold uppercase tracking-wide text-white shadow-brand sm:px-2.5 sm:text-[10px]">
+              Promo
+            </span>
+          ) : null}
+        </div>
       </div>
       <div className="h-[3px] bg-gradient-to-r from-brand-900 via-brand-500 to-brand-300" />
       <div className="p-4">
