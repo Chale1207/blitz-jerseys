@@ -2,11 +2,19 @@ import { loginAction } from "./actions";
 
 export const metadata = { title: "Admin Login" };
 
-export default function LoginPage({
+export default async function LoginPage({
   searchParams,
 }: {
-  searchParams: Promise<{ error?: string }>;
+  searchParams: Promise<{ error?: string; minutes?: string }>;
 }) {
+  const { error, minutes } = await searchParams;
+  const errorMessage =
+    error === "locked"
+      ? `Too many failed attempts. Try again in ${minutes ?? "a few"} minute${minutes === "1" ? "" : "s"}.`
+      : error === "invalid"
+        ? "Incorrect password. Try again."
+        : null;
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-ink-900 px-4">
       <div className="w-full max-w-sm">
@@ -20,6 +28,11 @@ export default function LoginPage({
         </div>
 
         <form action={loginAction} className="space-y-4">
+          {errorMessage && (
+            <p className="rounded-lg bg-danger/15 px-3 py-2 text-xs font-medium text-danger">
+              {errorMessage}
+            </p>
+          )}
           <div>
             <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-white/60">
               Password

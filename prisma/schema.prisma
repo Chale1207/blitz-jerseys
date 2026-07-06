@@ -84,3 +84,11 @@ model OrderItem {
   price       Int
   quantity    Int
 }
+
+model LoginAttempt {
+  id          String   @id @default(cuid())
+  ip          String   @unique
+  failCount   Int      @default(1)
+  firstFailAt DateTime @default(now())
+  lastFailAt  DateTime @default(now())
+}
