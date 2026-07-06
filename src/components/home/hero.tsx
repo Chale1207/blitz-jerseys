@@ -83,8 +83,36 @@ export function Hero() {
   const showDesktop = mounted && isDesktop;
 
   return (
-    <section className="floodlight relative overflow-hidden bg-ink-900 text-white">
-      <div className="container-page grid items-center gap-10 pb-10 pt-16 md:grid-cols-2 md:gap-10 md:pb-16 md:pt-24">
+    <section className="relative isolate overflow-hidden bg-ink-900 text-white">
+      {/* Video background — paused/replaced with a still frame when the visitor
+          prefers reduced motion, since a looping background video is exactly
+          the kind of ambient motion that preference is meant to suppress. */}
+      {reduceMotion ? (
+        <Image
+          src="/images/filler/filler-08.jpeg"
+          alt="Blitz Jerseys fans in full kit"
+          fill
+          priority
+          className="absolute inset-0 -z-20 object-cover"
+        />
+      ) : (
+        <video
+          className="absolute inset-0 -z-20 h-full w-full object-cover"
+          src="/videos/blitz-theme.mp4"
+          poster="/images/filler/filler-08.jpeg"
+          autoPlay
+          muted
+          loop
+          playsInline
+        />
+      )}
+
+      {/* Dark tint for text legibility + the signature floodlight glow, layered
+          over the video so the brand's match-night motif carries through. */}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink-900/90 via-ink-900/70 to-ink-900/95" />
+      <div className="floodlight absolute inset-0 -z-10" aria-hidden />
+
+      <div className="container-page relative grid items-center gap-10 pb-10 pt-16 md:grid-cols-2 md:gap-10 md:pb-16 md:pt-24">
         {/* Text column — always visible on SSR, no opacity-based initial */}
         <div>
           <span className="inline-flex items-center rounded-full bg-brand-500/20 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-brand-300">
