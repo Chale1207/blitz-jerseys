@@ -82,28 +82,45 @@ export async function updateProduct(id: string, formData: FormData) {
 
   const sizes = formData.getAll("size") as string[];
   const stocks = formData.getAll("stock") as string[];
+  const submittedVariants = sizes
+    .map((size, i) => ({ size: size.trim(), stock: parseInt(stocks[i] ?? "10", 10) }))
+    .filter((v) => v.size);
 
-  await prisma.$transaction([
-    prisma.productVariant.deleteMany({ where: { productId: id } }),
-    prisma.product.update({
+  const existingVariants = await prisma.productVariant.findMany({ where: { productId: id } });
+  const submittedSizes = new Set(submittedVariants.map((v) => v.size));
+  const removedVariants = existingVariants.filter((v) => !submittedSizes.has(v.size));
+
+  await prisma.$transaction(async (tx) => {
+    // Variants can't just be wiped and recreated — a size that's ever been
+    // ordered has an OrderItem pointing at its row, and deleting it violates
+    // that foreign key. Only remove sizes with no order history; upsert the
+    // rest so existing variant IDs (and their order references) survive.
+    for (const variant of removedVariants) {
+      const hasOrders = await tx.orderItem.findFirst({ where: { variantId: variant.id } });
+      if (!hasOrders) {
+        await tx.productVariant.delete({ where: { id: variant.id } });
+      }
+    }
+
+    for (const variant of submittedVariants) {
+      const existing = existingVariants.find((v) => v.size === variant.size);
+      if (existing) {
+        await tx.productVariant.update({
+          where: { id: existing.id },
+          data: { stock: variant.stock },
+        });
+      } else {
+        await tx.productVariant.create({
+          data: { productId: id, size: variant.size, stock: variant.stock },
+        });
+      }
+    }
+
+    await tx.product.update({
       where: { id },
-      data: {
-        name,
-        kitType,
-        season,
-        price,
-        description,
-        featured,
-        onSale,
-        imagesJson,
-        variants: {
-          create: sizes
-            .map((size, i) => ({ size: size.trim(), stock: parseInt(stocks[i] ?? "10", 10) }))
-            .filter((v) => v.size),
-        },
-      },
-    }),
-  ]);
+      data: { name, kitType, season, price, description, featured, onSale, imagesJson },
+    });
+  });
 
   revalidatePath("/");
   revalidatePath("/shop");
