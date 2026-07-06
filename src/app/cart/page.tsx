@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Minus, Plus, Trash2 } from "lucide-react";
 import { JerseyArt } from "@/components/jersey/jersey-art";
@@ -46,13 +47,23 @@ export default function CartPage() {
               key={item.variantId}
               className="flex gap-4 rounded-2xl border border-border bg-surface p-4"
             >
-              <div className="h-24 w-24 shrink-0 rounded-xl bg-surface-muted p-2">
-                <JerseyArt
-                  primaryColor={item.primaryColor}
-                  secondaryColor={item.secondaryColor}
-                  initials={item.initials}
-                  className="h-full w-full"
-                />
+              <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-xl bg-surface-muted p-2">
+                {item.imageSrc ? (
+                  <Image
+                    src={item.imageSrc}
+                    alt={`${item.teamName} ${item.productName}`}
+                    fill
+                    sizes="96px"
+                    className="object-contain p-1"
+                  />
+                ) : (
+                  <JerseyArt
+                    primaryColor={item.primaryColor}
+                    secondaryColor={item.secondaryColor}
+                    initials={item.initials}
+                    className="h-full w-full"
+                  />
+                )}
               </div>
 
               <div className="flex flex-1 flex-col justify-between">

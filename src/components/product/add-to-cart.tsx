@@ -15,6 +15,7 @@ export function AddToCart({
   primaryColor,
   secondaryColor,
   initials,
+  imageSrc,
   variants,
 }: {
   productSlug: string;
@@ -25,6 +26,7 @@ export function AddToCart({
   primaryColor: string;
   secondaryColor: string;
   initials: string;
+  imageSrc?: string;
   variants: Variant[];
 }) {
   const inStockVariants = variants.filter((v) => v.stock > 0);
@@ -47,6 +49,7 @@ export function AddToCart({
       primaryColor,
       secondaryColor,
       initials,
+      imageSrc,
       maxStock: selectedVariant.stock,
     });
     setJustAdded(true);

@@ -46,6 +46,8 @@ export default async function ProductPage({
     ? product.team.secondaryColor
     : product.team.primaryColor;
 
+  const productImage = getProductImages(product.slug, product.imagesJson)?.[0]?.src;
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -118,6 +120,7 @@ export default async function ProductPage({
               primaryColor={product.team.primaryColor}
               secondaryColor={product.team.secondaryColor}
               initials={product.team.shortName}
+              imageSrc={productImage}
               variants={sortedVariants}
             />
           </div>

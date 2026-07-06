@@ -12,6 +12,7 @@ export type CartItem = {
   primaryColor: string;
   secondaryColor: string;
   initials: string;
+  imageSrc?: string;
   maxStock: number;
   quantity: number;
 };
