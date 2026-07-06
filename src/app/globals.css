@@ -140,13 +140,6 @@ h1,
   }
 }
 
-/* Lifestyle photo strip — same principle as ticker but slower, image-sized. */
-@media (prefers-reduced-motion: no-preference) {
-  .photo-strip-track {
-    animation: ticker-scroll 55s linear infinite;
-  }
-}
-
 /* Universal hover glow — symmetric brand radial emanating from the element
    centre. Apply .hover-glow to any card or block that should feel alive. */
 .hover-glow {

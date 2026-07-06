@@ -6,6 +6,14 @@ import { ProductCard } from "@/components/product/product-card";
 import { ProductGrid } from "@/components/product/product-grid";
 import { getFeaturedProducts, getLeaguesWithTeams, getPromoProducts } from "@/lib/products";
 
+// National colors for each league's country, not the generic brand teal —
+// gives each competition card its own identity instead of an identical
+// dark rectangle differing only by label.
+const LEAGUE_ACCENT: Record<string, string> = {
+  "la-liga": "linear-gradient(90deg, #AA151B, #F1BF00, #AA151B)",
+  "premier-league": "linear-gradient(90deg, #1E2A5E, #C8102E, #1E2A5E)",
+};
+
 export default async function Home() {
   const [featured, leagues, promoProducts] = await Promise.all([
     getFeaturedProducts(8),
@@ -85,6 +93,11 @@ export default async function Home() {
               href={`/shop/${league.slug}`}
               className="hover-glow group relative overflow-hidden rounded-2xl bg-ink-900 px-10 py-12 text-white transition-transform duration-200 hover:-translate-y-1"
             >
+              <span
+                className="absolute inset-x-0 top-0 h-1.5"
+                style={{ background: LEAGUE_ACCENT[league.slug] }}
+                aria-hidden
+              />
               <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-brand-300">
                 {league.country}
               </p>
@@ -120,40 +133,35 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Lifestyle photo strip — auto-scrolling ticker */}
-      <section className="overflow-hidden border-y border-border py-10">
-        <div className="photo-strip-track flex w-max gap-4">
-          {[
-            { src: "/images/filler/filler-02.jpeg", alt: "Fans in Manchester United kits" },
-            { src: "/images/filler/filler-01.jpeg", alt: "Fans in Manchester United kits seated" },
-            { src: "/images/filler/filler-06.jpeg", alt: "Fans showing off their kits" },
-            { src: "/images/filler/filler-08.jpeg", alt: "Full kit lineup group shot" },
-            { src: "/images/filler/filler-09.jpeg", alt: "Fans in Real Madrid kits" },
-            { src: "/images/filler/filler-11.jpeg", alt: "Real Madrid fans group" },
-            { src: "/images/filler/filler-07.jpeg", alt: "Fans holding up a jersey" },
-            { src: "/images/filler/filler-05.jpeg", alt: "Fans in a variety of kits" },
-            { src: "/images/filler/filler-02.jpeg", alt: "Fans in Manchester United kits" },
-            { src: "/images/filler/filler-01.jpeg", alt: "Fans in Manchester United kits seated" },
-            { src: "/images/filler/filler-06.jpeg", alt: "Fans showing off their kits" },
-            { src: "/images/filler/filler-08.jpeg", alt: "Full kit lineup group shot" },
-            { src: "/images/filler/filler-09.jpeg", alt: "Fans in Real Madrid kits" },
-            { src: "/images/filler/filler-11.jpeg", alt: "Real Madrid fans group" },
-            { src: "/images/filler/filler-07.jpeg", alt: "Fans holding up a jersey" },
-            { src: "/images/filler/filler-05.jpeg", alt: "Fans in a variety of kits" },
-          ].map((photo, i) => (
-            <div
-              key={i}
-              className="relative aspect-[3/4] w-48 shrink-0 overflow-hidden rounded-2xl sm:w-56"
-            >
-              <Image
-                src={photo.src}
-                alt={photo.alt}
-                fill
-                sizes="224px"
-                className="object-cover"
-              />
-            </div>
-          ))}
+      {/* Lifestyle photo strip — a calm, user-driven scroll (swipe/drag), not
+          a second auto-scrolling marquee competing with the hero's ticker. */}
+      <section className="border-y border-border py-10">
+        <div className="container-page">
+          <div className="-mx-5 flex gap-4 overflow-x-auto px-5 pb-2 sm:mx-0 sm:px-0 [&::-webkit-scrollbar]:hidden">
+            {[
+              { src: "/images/filler/filler-02.jpeg", alt: "Fans in Manchester United kits" },
+              { src: "/images/filler/filler-01.jpeg", alt: "Fans in Manchester United kits seated" },
+              { src: "/images/filler/filler-06.jpeg", alt: "Fans showing off their kits" },
+              { src: "/images/filler/filler-08.jpeg", alt: "Full kit lineup group shot" },
+              { src: "/images/filler/filler-09.jpeg", alt: "Fans in Real Madrid kits" },
+              { src: "/images/filler/filler-11.jpeg", alt: "Real Madrid fans group" },
+              { src: "/images/filler/filler-07.jpeg", alt: "Fans holding up a jersey" },
+              { src: "/images/filler/filler-05.jpeg", alt: "Fans in a variety of kits" },
+            ].map((photo, i) => (
+              <div
+                key={i}
+                className="relative aspect-[3/4] w-48 shrink-0 overflow-hidden rounded-2xl sm:w-56"
+              >
+                <Image
+                  src={photo.src}
+                  alt={photo.alt}
+                  fill
+                  sizes="224px"
+                  className="object-cover"
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

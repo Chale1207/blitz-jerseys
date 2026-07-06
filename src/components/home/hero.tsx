@@ -40,12 +40,10 @@ function useIsDesktop() {
 function PhotoCard({
   photo,
   index,
-  reduceMotion,
   className,
 }: {
   photo: { src: string; alt: string };
   index: number;
-  reduceMotion: boolean;
   className: string;
 }) {
   return (
@@ -55,15 +53,7 @@ function PhotoCard({
       transition={{ duration: 0.65, delay: 0.2 + index * 0.15, ease: easeOut }}
       className={className}
     >
-      <motion.div
-        animate={reduceMotion ? undefined : { y: [0, -12, 0] }}
-        transition={
-          reduceMotion
-            ? undefined
-            : { duration: 3.2 + index * 0.5, repeat: Infinity, ease: "easeInOut", delay: index * 0.4 }
-        }
-        className="relative h-full w-full"
-      >
+      <div className="relative h-full w-full">
         <Image
           src={photo.src}
           alt={photo.alt}
@@ -72,7 +62,7 @@ function PhotoCard({
           className="object-cover"
           priority
         />
-      </motion.div>
+      </div>
     </motion.div>
   );
 }
@@ -163,7 +153,6 @@ export function Hero() {
                     key={photo.src}
                     photo={photo}
                     index={i}
-                    reduceMotion={reduceMotion}
                     className={`relative aspect-[4/5] overflow-hidden rounded-2xl ring-1 ring-white/10 ${
                       i % 2 === 1 ? "md:mt-7" : ""
                     }`}
@@ -180,7 +169,6 @@ export function Hero() {
                     key={photo.src}
                     photo={photo}
                     index={i}
-                    reduceMotion={reduceMotion}
                     className="relative aspect-[4/5] w-40 shrink-0 snap-center overflow-hidden rounded-2xl ring-1 ring-white/10"
                   />
                 ))}
