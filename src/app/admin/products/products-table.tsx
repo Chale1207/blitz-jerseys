@@ -113,21 +113,22 @@ export function ProductsTable({ products }: { products: ProductRow[] }) {
               <tbody className="divide-y divide-border">
                 {filtered.map((p) => {
                   const totalStock = p.variants.reduce((s, v) => s + v.stock, 0);
+                  const fullName = `${p.team.name} ${p.name}`;
                   return (
                     <tr key={p.id} className="hover:bg-surface-muted">
                       <td className="px-4 py-3">
-                        <p className="font-semibold text-ink-900">{p.name}</p>
-                        <p className="text-xs text-muted">{p.kitType}</p>
+                        <p className="font-semibold text-ink-900">{fullName}</p>
+                        <p className="text-xs text-muted">{p.kitType} · {p.season}</p>
                       </td>
                       <td className="px-4 py-3 text-muted">{p.team.league.name}</td>
                       <td className="px-4 py-3 text-muted">{p.season}</td>
                       <td className="px-4 py-3 font-semibold text-ink-900">K{p.price}</td>
                       <td className="px-4 py-3 text-muted">{totalStock}</td>
                       <td className="px-4 py-3 text-center">
-                        <ToggleFeaturedButton id={p.id} name={p.name} featured={p.featured} />
+                        <ToggleFeaturedButton id={p.id} name={fullName} featured={p.featured} />
                       </td>
                       <td className="px-4 py-3 text-center">
-                        <ToggleOnSaleButton id={p.id} name={p.name} onSale={p.onSale} />
+                        <ToggleOnSaleButton id={p.id} name={fullName} onSale={p.onSale} />
                       </td>
                       <td className="px-4 py-3">
                         <div className="flex items-center justify-end gap-2">
@@ -137,7 +138,7 @@ export function ProductsTable({ products }: { products: ProductRow[] }) {
                           >
                             <Pencil className="h-3 w-3" /> Edit
                           </Link>
-                          <DeleteButton id={p.id} name={p.name} />
+                          <DeleteButton id={p.id} name={fullName} />
                         </div>
                       </td>
                     </tr>
