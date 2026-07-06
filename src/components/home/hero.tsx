@@ -93,11 +93,11 @@ export function Hero() {
           alt="Blitz Jerseys fans in full kit"
           fill
           priority
-          className="absolute inset-0 -z-20 object-cover"
+          className="absolute inset-0 -z-20 object-cover brightness-[0.4]"
         />
       ) : (
         <video
-          className="absolute inset-0 -z-20 h-full w-full object-cover"
+          className="absolute inset-0 -z-20 h-full w-full object-cover brightness-[0.4]"
           src="/videos/blitz-theme.mp4"
           poster="/images/filler/filler-08.jpeg"
           autoPlay
@@ -107,9 +107,11 @@ export function Hero() {
         />
       )}
 
-      {/* Dark tint for text legibility + the signature floodlight glow, layered
-          over the video so the brand's match-night motif carries through. */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink-900/90 via-ink-900/70 to-ink-900/95" />
+      {/* Flat dark tint for text legibility + the signature floodlight glow.
+          A flat tint (not a gradient) avoids letting the video's brightness
+          show through unevenly behind the photo grid — it read as a moving
+          shadow crossing the photos. */}
+      <div className="absolute inset-0 -z-10 bg-ink-900/60" />
       <div className="floodlight absolute inset-0 -z-10" aria-hidden />
 
       <div className="container-page relative grid items-center gap-10 pb-10 pt-16 md:grid-cols-2 md:gap-10 md:pb-16 md:pt-24">
