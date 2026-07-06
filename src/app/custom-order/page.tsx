@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { MessageCircle } from "lucide-react";
-import { buildCustomOrderWhatsAppLink } from "@/lib/whatsapp";
+import { buildCustomOrderWhatsAppLink, formatWhatsAppDisplay } from "@/lib/whatsapp";
 
 export default function CustomOrderPage() {
   const [form, setForm] = useState({
@@ -34,7 +34,7 @@ export default function CustomOrderPage() {
           Custom Club Orders
         </h1>
         <p className="mt-3 text-sm leading-relaxed text-muted">
-          Any club, any kit, retro or current season &mdash; if it&apos;s not in
+          Any club, any kit, retro or current season. If it&apos;s not in
           our shop yet, tell us what you&apos;re after and we&apos;ll source it.
           Add a name and number for printing, or send a reference photo
           directly on WhatsApp after submitting.
@@ -163,15 +163,19 @@ export default function CustomOrderPage() {
         </button>
         {sent ? (
           <p className="text-sm text-brand-600">
-            Opened WhatsApp with your request &mdash; send it over and attach a
+            Opened WhatsApp with your request. Send it over and attach a
             reference photo if you have one.
           </p>
         ) : (
           <p className="text-xs text-muted">
             This opens WhatsApp with your details filled in. No payment is
-            taken here &mdash; we&apos;ll confirm price and delivery with you directly.
+            taken here, we&apos;ll confirm price and delivery with you directly.
           </p>
         )}
+        <p className="text-xs text-muted">
+          You can also message us directly:{" "}
+          {formatWhatsAppDisplay(process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "")}
+        </p>
       </form>
     </div>
   );

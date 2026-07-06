@@ -5,6 +5,7 @@ import {
   TikTokIcon,
   XIcon as XSocialIcon,
 } from "@/components/icons/social-icons";
+import { formatWhatsAppDisplay } from "@/lib/whatsapp";
 
 export const metadata = { title: "Contact" };
 
@@ -28,8 +29,8 @@ export default function ContactPage() {
           Get in Touch
         </h1>
         <p className="mt-4 text-sm text-muted">
-          Orders are confirmed over WhatsApp &mdash; sizes, delivery cost, and
-          timing, sorted directly with our team.
+          We confirm every order over WhatsApp, sorting out sizes, delivery
+          cost, and timing directly with our team.
         </p>
 
         <a
@@ -40,6 +41,9 @@ export default function ContactPage() {
         >
           <MessageCircle className="h-5 w-5" /> Chat on WhatsApp
         </a>
+        <p className="mt-3 text-sm font-medium text-ink-900">
+          {formatWhatsAppDisplay(whatsappNumber)}
+        </p>
 
         <div className="mt-10 flex justify-center gap-3">
           {socialLinks.map(({ href, label, Icon }) => (

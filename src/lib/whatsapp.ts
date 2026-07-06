@@ -1,5 +1,17 @@
 import { formatPrice } from "./format";
 
+// The site only ever showed a "Chat on WhatsApp" button — the actual number
+// was never visible as text, so customers had no way to see, verify, or
+// manually save/dial it. Formats "260776290553" -> "+260 776 290 553".
+export function formatWhatsAppDisplay(raw: string): string {
+  const digits = raw.replace(/\D/g, "");
+  if (digits.startsWith("260") && digits.length === 12) {
+    const rest = digits.slice(3);
+    return `+260 ${rest.slice(0, 3)} ${rest.slice(3, 6)} ${rest.slice(6, 9)}`;
+  }
+  return digits ? `+${digits}` : "";
+}
+
 export interface WhatsAppOrderItem {
   teamName: string;
   productName: string;

@@ -19,14 +19,14 @@ export default async function PromotionsPage() {
           </h1>
           <p className="mt-3 max-w-md text-sm text-white/70">
             2025/26 season kits at clearance prices while stock lasts. Once
-            they&apos;re gone, they&apos;re gone &mdash; no restocks.
+            they&apos;re gone, they&apos;re gone. No restocks.
           </p>
         </div>
       </section>
 
       <div className="container-page py-10">
         {products.length === 0 ? (
-          <p className="py-16 text-center text-muted">No promotions running right now &mdash; check back soon.</p>
+          <p className="py-16 text-center text-muted">No promotions running right now. Check back soon.</p>
         ) : (
           <ProductGrid>
             {products.map((product) => (

@@ -30,7 +30,7 @@ export default function AboutPage() {
             Serie A, and LaLiga shouldn&apos;t have to choose between quality and
             accessibility. We source performance-grade football shirts inspired
             by the clubs that define matchday culture, and we back it up with
-            real, human support &mdash; no call centers, just a WhatsApp message
+            real, human support. No call centers, just a WhatsApp message
             away.
           </p>
         </div>

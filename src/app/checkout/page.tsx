@@ -99,10 +99,14 @@ export default function CheckoutPage() {
               id="phone"
               type="tel"
               required
+              placeholder="+260 XXX XXX XXX"
               value={form.phone}
               onChange={(e) => setForm({ ...form, phone: e.target.value })}
               className="mt-1.5 w-full rounded-lg border border-border px-4 py-3 text-sm outline-none focus:border-brand-500"
             />
+            <p className="mt-1 text-xs text-muted">
+              Include your country code so we can confirm your order on WhatsApp.
+            </p>
           </div>
 
           <div>
@@ -119,7 +123,7 @@ export default function CheckoutPage() {
               <input
                 type="tel"
                 required
-                placeholder="WhatsApp number"
+                placeholder="+260 XXX XXX XXX"
                 value={form.whatsapp}
                 onChange={(e) => setForm({ ...form, whatsapp: e.target.value })}
                 className="mt-2 w-full rounded-lg border border-border px-4 py-3 text-sm outline-none focus:border-brand-500"

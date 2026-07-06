@@ -62,7 +62,7 @@ export default async function Home() {
                 Promotions Are Live
               </h2>
               <p className="mt-1 text-sm text-white/70">
-                2025/26 kits at clearance prices &mdash; while stock lasts.
+                2025/26 kits at clearance prices while stock lasts.
               </p>
             </div>
             <Link
@@ -118,10 +118,10 @@ export default async function Home() {
             Not in the Shop Yet?
           </p>
           <h2 className="max-w-xl font-display text-2xl font-bold uppercase leading-tight md:text-3xl">
-            Any Club, Any Kit &mdash; We&apos;ll Source It
+            Any Club, Any Kit? We&apos;ll Source It
           </h2>
           <p className="max-w-md text-sm text-white/70">
-            Retro seasons, national teams, name and number printing &mdash; tell
+            Retro seasons, national teams, name and number printing. Tell
             us what you want and we&apos;ll get it made.
           </p>
           <Link

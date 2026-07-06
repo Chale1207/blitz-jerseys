@@ -7,6 +7,7 @@ import {
   TikTokIcon,
   XIcon as XSocialIcon,
 } from "@/components/icons/social-icons";
+import { formatWhatsAppDisplay } from "@/lib/whatsapp";
 
 const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "";
 
@@ -75,6 +76,9 @@ export function Footer() {
               >
                 <MessageCircle className="h-4 w-4" /> WhatsApp Us
               </a>
+              <span className="ml-6 block text-xs text-white/50">
+                {formatWhatsAppDisplay(whatsappNumber)}
+              </span>
             </li>
             <li><Link href="/contact" className="hover:text-brand-300">Contact Page</Link></li>
             <li><Link href="/track-order" className="hover:text-brand-300">Track Order</Link></li>

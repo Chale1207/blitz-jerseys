@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { MessageCircle, ShoppingCart, CheckCircle2, Truck, PackageCheck } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { formatPrice } from "@/lib/format";
-import { buildOrderWhatsAppLink } from "@/lib/whatsapp";
+import { buildOrderWhatsAppLink, formatWhatsAppDisplay } from "@/lib/whatsapp";
 import { OrderStatusBadge } from "@/components/order-status-badge";
 import { ORDER_STATUS_LABELS, ORDER_STATUS_MESSAGES } from "@/lib/order-status";
 import { OrderState } from "@/components/ui/order-state";
@@ -88,7 +88,7 @@ export default async function OrderConfirmationPage({
         {copy.body(order.orderNumber)}
       </p>
       <p className="mt-1 text-xs text-muted">
-        Bookmark this page or save your order number — you can check your order status anytime at{" "}
+        Bookmark this page or save your order number so you can check your order status anytime at{" "}
         <Link href="/track-order" className="font-semibold text-brand-600 hover:text-brand-700">
           Track Order
         </Link>
@@ -103,6 +103,9 @@ export default async function OrderConfirmationPage({
       >
         <MessageCircle className="h-5 w-5" /> {copy.whatsappLabel}
       </a>
+      <p className="mt-2 text-xs text-muted">
+        Or message us directly: {formatWhatsAppDisplay(process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "")}
+      </p>
 
       {order.status !== "cancelled" && (
         <div className="mt-10 w-full max-w-xl">
