@@ -87,7 +87,10 @@ export default async function OrderConfirmationPage({
 
       {order.status !== "cancelled" && (
         <div className="mt-10 w-full max-w-md">
-          <OrderState states={orderSteps} className="md:grid-cols-2 lg:grid-cols-2" />
+          <OrderState
+            states={orderSteps}
+            className="grid-cols-2 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-2"
+          />
         </div>
       )}
 
