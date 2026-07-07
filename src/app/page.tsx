@@ -38,7 +38,7 @@ export default async function Home() {
             <Truck className="h-6 w-6 text-brand-500" />
             <div>
               <p className="text-sm font-semibold text-ink-900">Nationwide Delivery</p>
-              <p className="text-xs text-muted">Tracked, door to door</p>
+              <p className="text-xs text-muted">Tracked, door to door across Zambia</p>
             </div>
           </div>
           <div className="flex items-center gap-3">

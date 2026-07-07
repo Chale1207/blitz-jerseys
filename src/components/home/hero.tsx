@@ -130,7 +130,8 @@ export function Hero() {
           </h1>
           <p className="mt-6 max-w-md font-head text-base leading-relaxed tracking-wide text-white/75 md:text-lg">
             Performance jerseys inspired by the Premier League, Serie A, and
-            LaLiga&apos;s biggest clubs. Order in seconds, confirm on WhatsApp.
+            LaLiga&apos;s biggest clubs, delivered across Zambia. Order in
+            seconds, confirm on WhatsApp.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <Link

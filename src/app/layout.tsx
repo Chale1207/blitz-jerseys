@@ -22,20 +22,23 @@ const archivo = Archivo({
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://blitzjerseys.com";
-const title = "Blitz Jerseys | Premier League, Serie A & LaLiga Kits";
+const title = "Blitz Jerseys | Football Jerseys & Kits in Zambia";
 const description =
-  "Match-night performance jerseys for the Premier League, Serie A, and LaLiga's biggest clubs. Order in seconds, confirm on WhatsApp.";
+  "Buy football jerseys in Zambia: Premier League, Serie A, and LaLiga kits, delivered nationwide to Lusaka, Ndola, Kitwe, and beyond. Order in seconds, confirm on WhatsApp.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: { default: title, template: "%s | Blitz Jerseys" },
   description,
   keywords: [
-    "football jerseys",
-    "soccer kits",
-    "Premier League jersey",
-    "LaLiga jersey",
-    "Serie A jersey",
+    "football jerseys Zambia",
+    "soccer jerseys Zambia",
+    "buy jerseys online Zambia",
+    "jersey shop Lusaka",
+    "football kits Zambia",
+    "Premier League jersey Zambia",
+    "LaLiga jersey Zambia",
+    "Serie A jersey Zambia",
     "Blitz Jerseys",
   ],
   openGraph: {
@@ -56,6 +59,28 @@ export const metadata: Metadata = {
   },
 };
 
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SportingGoodsStore",
+  name: "Blitz Jerseys",
+  description,
+  url: siteUrl,
+  areaServed: {
+    "@type": "Country",
+    name: "Zambia",
+  },
+  address: {
+    "@type": "PostalAddress",
+    addressCountry: "ZM",
+  },
+  sameAs: [
+    process.env.NEXT_PUBLIC_INSTAGRAM_URL,
+    process.env.NEXT_PUBLIC_FACEBOOK_URL,
+    process.env.NEXT_PUBLIC_TIKTOK_URL,
+    process.env.NEXT_PUBLIC_TWITTER_URL,
+  ].filter(Boolean),
+};
+
 export const viewport: Viewport = {
   themeColor: "#0b1211",
 };
@@ -71,6 +96,10 @@ export default function RootLayout({
       className={`${anton.variable} ${oswald.variable} ${archivo.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
         <SiteChrome navbar={<Navbar />}>{children}</SiteChrome>
       </body>
     </html>

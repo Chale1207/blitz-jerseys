@@ -26,12 +26,12 @@ export default function AboutPage() {
       <div className="container-page py-16">
         <div className="mx-auto max-w-2xl text-center">
           <p className="text-base leading-relaxed text-muted">
-            Blitz Jerseys started with one idea: fans across the Premier League,
-            Serie A, and LaLiga shouldn&apos;t have to choose between quality and
-            accessibility. We source performance-grade football shirts inspired
-            by the clubs that define matchday culture, and we back it up with
-            real, human support. No call centers, just a WhatsApp message
-            away.
+            Blitz Jerseys started in Zambia with one idea: fans across the
+            Premier League, Serie A, and LaLiga shouldn&apos;t have to choose
+            between quality and accessibility. We source performance-grade
+            football shirts inspired by the clubs that define matchday
+            culture, deliver them nationwide, and back it up with real, human
+            support. No call centers, just a WhatsApp message away.
           </p>
         </div>
 
