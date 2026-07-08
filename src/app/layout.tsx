@@ -31,6 +31,10 @@ export const metadata: Metadata = {
   title: { default: title, template: "%s | Blitz Jerseys" },
   description,
   keywords: [
+    "Blitz Jerseys",
+    "blitzjerseys",
+    "blitz jerseys zambia",
+    "jerseys in zambia",
     "football jerseys Zambia",
     "soccer jerseys Zambia",
     "buy jerseys online Zambia",
@@ -39,7 +43,6 @@ export const metadata: Metadata = {
     "Premier League jersey Zambia",
     "LaLiga jersey Zambia",
     "Serie A jersey Zambia",
-    "Blitz Jerseys",
   ],
   openGraph: {
     title,
@@ -63,6 +66,7 @@ const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "SportingGoodsStore",
   name: "Blitz Jerseys",
+  alternateName: "blitzjerseys",
   description,
   url: siteUrl,
   areaServed: {
