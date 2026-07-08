@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { InfiniteSlider } from "@/components/ui/infinite-slider";
 
 const CLUBS = [
   { name: "Arsenal", dot: "#EF0107" },
@@ -34,6 +35,9 @@ function useMediaQuery(query: string) {
   return state;
 }
 
+// Desktop only: wraps the pop-in card in a perpetually floating shell so
+// both animations run on separate elements (stacking transforms on the same
+// element causes one to override the other after fill-mode locks in).
 function PhotoCard({
   photo,
   index,
@@ -43,20 +47,25 @@ function PhotoCard({
   index: number;
   className: string;
 }) {
+  const floatClass = index % 2 === 0 ? "animate-float-up" : "animate-float-down";
+  const floatDelay = `${index * 0.75}s`;
+
   return (
-    <div
-      className={`animate-photo-pop-in ${className}`}
-      style={{ animationDelay: `${0.2 + index * 0.15}s` }}
-    >
-      <div className="relative h-full w-full">
-        <Image
-          src={photo.src}
-          alt={photo.alt}
-          fill
-          sizes="(min-width: 768px) 22vw, 40vw"
-          className="object-cover"
-          priority
-        />
+    <div className={floatClass} style={{ animationDelay: floatDelay }}>
+      <div
+        className={`animate-photo-pop-in ${className}`}
+        style={{ animationDelay: `${0.2 + index * 0.15}s` }}
+      >
+        <div className="relative h-full w-full">
+          <Image
+            src={photo.src}
+            alt={photo.alt}
+            fill
+            sizes="22vw"
+            className="object-cover"
+            priority
+          />
+        </div>
       </div>
     </div>
   );
@@ -164,25 +173,34 @@ export function Hero() {
               ))}
             </div>
           ) : (
-            <div className="-mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 [&::-webkit-scrollbar]:hidden">
-              {LIFESTYLE_PHOTOS.map((photo, i) => (
-                <PhotoCard
+            // Mobile: photos loop continuously — InfiniteSlider extends
+            // edge-to-edge by cancelling the container-page padding with -mx-5.
+            <InfiniteSlider gap={16} duration={18} durationOnHover={60} className="-mx-5">
+              {LIFESTYLE_PHOTOS.map((photo) => (
+                <div
                   key={photo.src}
-                  photo={photo}
-                  index={i}
-                  className="relative aspect-[4/5] w-40 shrink-0 snap-center overflow-hidden rounded-2xl ring-1 ring-white/10"
-                />
+                  className="relative aspect-[4/5] w-40 shrink-0 overflow-hidden rounded-2xl ring-1 ring-white/10"
+                >
+                  <Image
+                    src={photo.src}
+                    alt={photo.alt}
+                    fill
+                    sizes="160px"
+                    className="object-cover"
+                    priority
+                  />
+                </div>
               ))}
-            </div>
+            </InfiniteSlider>
           )}
         </div>
       </div>
 
-      <div className="relative overflow-hidden border-t border-white/10 py-3">
-        <div className="flex w-max gap-10 whitespace-nowrap ticker-track">
-          {[...CLUBS, ...CLUBS].map((club, i) => (
+      <div className="border-t border-white/10 py-3">
+        <InfiniteSlider gap={40} duration={26} className="whitespace-nowrap">
+          {CLUBS.map((club) => (
             <span
-              key={i}
+              key={club.name}
               className="flex items-center gap-2 font-head text-xs font-semibold uppercase tracking-widest text-white/60"
             >
               <span
@@ -193,7 +211,7 @@ export function Hero() {
               {club.name}
             </span>
           ))}
-        </div>
+        </InfiniteSlider>
       </div>
     </section>
   );

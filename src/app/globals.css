@@ -146,6 +146,41 @@ h1,
   }
 }
 
+/* InfiniteSlider — pixel-accurate loop driven by a CSS custom property set by
+   the component once react-use-measure has the real content width. Scoped to
+   no-preference so reduced-motion visitors just see static content. */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes infinite-slider-h {
+    from { transform: translateX(0); }
+    to   { transform: translateX(var(--slider-dist)); }
+  }
+  @keyframes infinite-slider-v {
+    from { transform: translateY(0); }
+    to   { transform: translateY(var(--slider-dist)); }
+  }
+}
+
+/* Desktop hero photo float — applied to the wrapper *outside* the pop-in
+   element so the two transforms run on separate elements and don't override
+   each other after pop-in's fill-mode locks in. Even cards float up, odd
+   cards float down, staggered so the grid breathes as a whole. */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes float-up {
+    from { transform: translateY(0); }
+    to   { transform: translateY(-10px); }
+  }
+  @keyframes float-down {
+    from { transform: translateY(0); }
+    to   { transform: translateY(10px); }
+  }
+  .animate-float-up {
+    animation: float-up 3.5s ease-in-out infinite alternate;
+  }
+  .animate-float-down {
+    animation: float-down 3.5s ease-in-out infinite alternate;
+  }
+}
+
 /* Hero photo entrance — a plain CSS keyframe instead of a JS animation
    library for a one-time mount pop-in. Only defined inside the
    no-preference query, so reduced-motion visitors just get the element at
