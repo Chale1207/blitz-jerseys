@@ -146,6 +146,28 @@ h1,
   }
 }
 
+/* Hero photo entrance — a plain CSS keyframe instead of a JS animation
+   library for a one-time mount pop-in. Only defined inside the
+   no-preference query, so reduced-motion visitors just get the element at
+   its normal (fully visible, untransformed) resting state with no JS
+   needed to detect the preference. */
+@keyframes photo-pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.85) translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .animate-photo-pop-in {
+    animation: photo-pop-in 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+}
+
 /* Universal hover glow — symmetric brand radial emanating from the element
    centre. Apply .hover-glow to any card or block that should feel alive. */
 .hover-glow {

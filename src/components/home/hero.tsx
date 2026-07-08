@@ -3,9 +3,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-
-const easeOut = [0.16, 1, 0.3, 1] as const;
 
 const CLUBS = [
   { name: "Arsenal", dot: "#EF0107" },
@@ -23,16 +20,16 @@ const LIFESTYLE_PHOTOS = [
   { src: "/images/filler/filler-20.jpeg", alt: "Fan in Chelsea home kit" },
 ];
 
-function useIsDesktop() {
-  const [state, setState] = useState({ mounted: false, isDesktop: false });
+function useMediaQuery(query: string) {
+  const [state, setState] = useState({ mounted: false, matches: false });
 
   useEffect(() => {
-    const mq = window.matchMedia("(min-width: 768px)");
-    const update = () => setState({ mounted: true, isDesktop: mq.matches });
+    const mq = window.matchMedia(query);
+    const update = () => setState({ mounted: true, matches: mq.matches });
     update();
     mq.addEventListener("change", update);
     return () => mq.removeEventListener("change", update);
-  }, []);
+  }, [query]);
 
   return state;
 }
@@ -47,11 +44,9 @@ function PhotoCard({
   className: string;
 }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.85, y: 24 }}
-      animate={{ opacity: 1, scale: 1, y: 0 }}
-      transition={{ duration: 0.65, delay: 0.2 + index * 0.15, ease: easeOut }}
-      className={className}
+    <div
+      className={`animate-photo-pop-in ${className}`}
+      style={{ animationDelay: `${0.2 + index * 0.15}s` }}
     >
       <div className="relative h-full w-full">
         <Image
@@ -63,13 +58,13 @@ function PhotoCard({
           priority
         />
       </div>
-    </motion.div>
+    </div>
   );
 }
 
 export function Hero() {
-  const { mounted, isDesktop } = useIsDesktop();
-  const reduceMotion = Boolean(useReducedMotion());
+  const { mounted, matches: isDesktop } = useMediaQuery("(min-width: 768px)");
+  const { matches: reduceMotion } = useMediaQuery("(prefers-reduced-motion: reduce)");
   const showDesktop = mounted && isDesktop;
 
   // Mount the <video> only after hydration so its network request never
@@ -149,38 +144,37 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Photo grid — always visible, photos pop-in via PhotoCard animations */}
+        {/* Photo grid — always visible, photos pop-in via a CSS keyframe.
+            The mobile/desktop layout swap (on resize/rotation only, never
+            during a normal session) is an instant swap rather than a
+            crossfade — not worth a JS animation library for an event that
+            essentially never fires in practice. */}
         <div className="relative mx-auto w-full min-w-0 max-w-md">
-          <AnimatePresence mode="wait" initial={false}>
-            {showDesktop ? (
-              <div key="desktop" className="grid grid-cols-2 gap-4">
-                {LIFESTYLE_PHOTOS.map((photo, i) => (
-                  <PhotoCard
-                    key={photo.src}
-                    photo={photo}
-                    index={i}
-                    className={`relative aspect-[4/5] overflow-hidden rounded-2xl ring-1 ring-white/10 ${
-                      i % 2 === 1 ? "md:mt-7" : ""
-                    }`}
-                  />
-                ))}
-              </div>
-            ) : (
-              <div
-                key="mobile"
-                className="-mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 [&::-webkit-scrollbar]:hidden"
-              >
-                {LIFESTYLE_PHOTOS.map((photo, i) => (
-                  <PhotoCard
-                    key={photo.src}
-                    photo={photo}
-                    index={i}
-                    className="relative aspect-[4/5] w-40 shrink-0 snap-center overflow-hidden rounded-2xl ring-1 ring-white/10"
-                  />
-                ))}
-              </div>
-            )}
-          </AnimatePresence>
+          {showDesktop ? (
+            <div className="grid grid-cols-2 gap-4">
+              {LIFESTYLE_PHOTOS.map((photo, i) => (
+                <PhotoCard
+                  key={photo.src}
+                  photo={photo}
+                  index={i}
+                  className={`relative aspect-[4/5] overflow-hidden rounded-2xl ring-1 ring-white/10 ${
+                    i % 2 === 1 ? "md:mt-7" : ""
+                  }`}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="-mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 [&::-webkit-scrollbar]:hidden">
+              {LIFESTYLE_PHOTOS.map((photo, i) => (
+                <PhotoCard
+                  key={photo.src}
+                  photo={photo}
+                  index={i}
+                  className="relative aspect-[4/5] w-40 shrink-0 snap-center overflow-hidden rounded-2xl ring-1 ring-white/10"
+                />
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
