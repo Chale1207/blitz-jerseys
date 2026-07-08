@@ -4,6 +4,7 @@ import { ShieldCheck, MessageCircle, Truck } from "lucide-react";
 import { Hero } from "@/components/home/hero";
 import { ProductCard } from "@/components/product/product-card";
 import { ProductGrid } from "@/components/product/product-grid";
+import { InfiniteSlider } from "@/components/ui/infinite-slider";
 import { getFeaturedProducts, getLeaguesWithTeams, getPromoProducts } from "@/lib/products";
 
 // National colors for each league's country, not the generic brand teal —
@@ -133,36 +134,34 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Lifestyle photo strip — a calm, user-driven scroll (swipe/drag), not
-          a second auto-scrolling marquee competing with the hero's ticker. */}
-      <section className="border-y border-border py-10">
-        <div className="container-page">
-          <div className="-mx-5 flex gap-4 overflow-x-auto px-5 pb-2 sm:mx-0 sm:px-0 [&::-webkit-scrollbar]:hidden">
-            {[
-              { src: "/images/filler/filler-02.jpeg", alt: "Fans in Manchester United kits" },
-              { src: "/images/filler/filler-01.jpeg", alt: "Fans in Manchester United kits seated" },
-              { src: "/images/filler/filler-06.jpeg", alt: "Fans showing off their kits" },
-              { src: "/images/filler/filler-08.jpeg", alt: "Full kit lineup group shot" },
-              { src: "/images/filler/filler-09.jpeg", alt: "Fans in Real Madrid kits" },
-              { src: "/images/filler/filler-11.jpeg", alt: "Real Madrid fans group" },
-              { src: "/images/filler/filler-07.jpeg", alt: "Fans holding up a jersey" },
-              { src: "/images/filler/filler-05.jpeg", alt: "Fans in a variety of kits" },
-            ].map((photo, i) => (
-              <div
-                key={i}
-                className="relative aspect-[3/4] w-48 shrink-0 overflow-hidden rounded-2xl sm:w-56"
-              >
-                <Image
-                  src={photo.src}
-                  alt={photo.alt}
-                  fill
-                  sizes="224px"
-                  className="object-cover"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
+      {/* Lifestyle photo strip — loops automatically so the page feels alive
+          without requiring the user to discover the swipe gesture. */}
+      <section className="border-y border-border py-10 overflow-hidden">
+        <InfiniteSlider gap={16} duration={30} durationOnHover={80}>
+          {[
+            { src: "/images/filler/filler-02.jpeg", alt: "Fans in Manchester United kits" },
+            { src: "/images/filler/filler-01.jpeg", alt: "Fans in Manchester United kits seated" },
+            { src: "/images/filler/filler-06.jpeg", alt: "Fans showing off their kits" },
+            { src: "/images/filler/filler-08.jpeg", alt: "Full kit lineup group shot" },
+            { src: "/images/filler/filler-09.jpeg", alt: "Fans in Real Madrid kits" },
+            { src: "/images/filler/filler-11.jpeg", alt: "Real Madrid fans group" },
+            { src: "/images/filler/filler-07.jpeg", alt: "Fans holding up a jersey" },
+            { src: "/images/filler/filler-05.jpeg", alt: "Fans in a variety of kits" },
+          ].map((photo, i) => (
+            <div
+              key={i}
+              className="relative aspect-[3/4] w-48 shrink-0 overflow-hidden rounded-2xl sm:w-56"
+            >
+              <Image
+                src={photo.src}
+                alt={photo.alt}
+                fill
+                sizes="224px"
+                className="object-cover"
+              />
+            </div>
+          ))}
+        </InfiniteSlider>
       </section>
 
       <section className="container-page pt-14 pb-20">
