@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { MessageCircle } from "lucide-react";
 import { buildCustomOrderWhatsAppLink, formatWhatsAppDisplay } from "@/lib/whatsapp";
+import { submitCustomOrder } from "./actions";
 
 export default function CustomOrderPage() {
   const [form, setForm] = useState({
@@ -15,13 +17,26 @@ export default function CustomOrderPage() {
     quantity: "1",
     notes: "",
   });
-  const [sent, setSent] = useState(false);
+  const [orderNumber, setOrderNumber] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const link = buildCustomOrderWhatsAppLink(form);
-    window.open(link, "_blank", "noopener,noreferrer");
-    setSent(true);
+    setError(null);
+    setSubmitting(true);
+    try {
+      const result = await submitCustomOrder(form);
+      if (!result.success) {
+        setError(result.error);
+        return;
+      }
+      const link = buildCustomOrderWhatsAppLink(form);
+      window.open(link, "_blank", "noopener,noreferrer");
+      setOrderNumber(result.orderNumber);
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -157,14 +172,27 @@ export default function CustomOrderPage() {
 
         <button
           type="submit"
-          className="hover-glow inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand-600 py-3.5 text-sm font-bold uppercase tracking-wide text-white shadow-brand transition-transform hover:scale-[1.01] hover:bg-brand-700 active:scale-95 sm:w-auto sm:px-8"
+          disabled={submitting}
+          className="hover-glow inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand-600 py-3.5 text-sm font-bold uppercase tracking-wide text-white shadow-brand transition-transform hover:scale-[1.01] hover:bg-brand-700 active:scale-95 disabled:opacity-60 sm:w-auto sm:px-8"
         >
-          <MessageCircle className="h-5 w-5" /> Send Request on WhatsApp
+          <MessageCircle className="h-5 w-5" />
+          {submitting ? "Saving…" : "Send Request on WhatsApp"}
         </button>
-        {sent ? (
+        {error ? (
+          <p className="text-sm text-danger">{error}</p>
+        ) : orderNumber ? (
           <p className="text-sm text-brand-600">
-            Opened WhatsApp with your request. Send it over and attach a
-            reference photo if you have one.
+            Request saved as{" "}
+            <span className="font-mono font-semibold">{orderNumber}</span>. Opened
+            WhatsApp with your request, send it over and attach a reference
+            photo if you have one. Track progress anytime at{" "}
+            <Link
+              href={`/track-custom-order/${orderNumber}`}
+              className="font-semibold underline"
+            >
+              /track-custom-order/{orderNumber}
+            </Link>
+            .
           </p>
         ) : (
           <p className="text-xs text-muted">

@@ -46,12 +46,13 @@ model Product {
 }
 
 model ProductVariant {
-  id         String      @id @default(cuid())
-  size       String
-  stock      Int
-  productId  String
-  product    Product     @relation(fields: [productId], references: [id])
-  orderItems OrderItem[]
+  id           String        @id @default(cuid())
+  size         String
+  stock        Int
+  productId    String
+  product      Product       @relation(fields: [productId], references: [id])
+  orderItems   OrderItem[]
+  customOrders CustomOrder[]
 
   @@unique([productId, size])
 }
@@ -91,4 +92,21 @@ model LoginAttempt {
   failCount   Int      @default(1)
   firstFailAt DateTime @default(now())
   lastFailAt  DateTime @default(now())
+}
+
+model CustomOrder {
+  id                String          @id @default(cuid())
+  orderNumber       String          @unique
+  customerName      String
+  whatsapp          String
+  club              String
+  kitDescription    String
+  size              String
+  quantity          Int             @default(1)
+  nameAndNumber     String?
+  notes             String?
+  status            String          @default("new")
+  assignedVariantId String?
+  assignedVariant   ProductVariant? @relation(fields: [assignedVariantId], references: [id])
+  createdAt         DateTime        @default(now())
 }
