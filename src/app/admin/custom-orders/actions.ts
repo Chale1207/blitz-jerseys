@@ -19,6 +19,14 @@ export async function deleteCustomOrder(id: string) {
   revalidateAll();
 }
 
+export async function setCustomOrderPrice(id: string, totalPrice: number | null) {
+  if (totalPrice !== null && (!Number.isFinite(totalPrice) || totalPrice < 0)) {
+    throw new Error("Enter a valid price.");
+  }
+  await prisma.customOrder.update({ where: { id }, data: { totalPrice } });
+  revalidateAll();
+}
+
 // Assigns an already-stocked variant to a custom order (e.g. client only
 // needed a name/number printed on a jersey we already carry). Decrements
 // stock the same way a normal checkout would, inside a transaction so a

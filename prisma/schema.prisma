@@ -106,6 +106,7 @@ model CustomOrder {
   nameAndNumber     String?
   notes             String?
   status            String          @default("new")
+  totalPrice        Int?
   assignedVariantId String?
   assignedVariant   ProductVariant? @relation(fields: [assignedVariantId], references: [id])
   createdAt         DateTime        @default(now())

@@ -5,6 +5,7 @@ import { Search } from "lucide-react";
 import { StatusSelect } from "./status-select";
 import { DeleteButton } from "./delete-button";
 import { AssignStockDialog } from "./assign-stock-dialog";
+import { PriceEditor } from "./price-editor";
 import { CUSTOM_ORDER_STATUSES, CUSTOM_ORDER_STATUS_LABELS } from "@/lib/custom-order-status";
 
 type StockOption = {
@@ -27,6 +28,7 @@ type CustomOrderRow = {
   quantity: number;
   nameAndNumber: string | null;
   status: string;
+  totalPrice: number | null;
   createdAt: Date;
   assignedVariant: {
     size: string;
@@ -107,7 +109,7 @@ export function CustomOrdersTable({
           </p>
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[980px] text-sm">
+            <table className="w-full min-w-[1080px] text-sm">
               <thead className="border-b border-border bg-surface-muted">
                 <tr>
                   <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-muted">Request #</th>
@@ -116,6 +118,7 @@ export function CustomOrdersTable({
                   <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-muted">Requested Kit</th>
                   <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-muted">Size / Qty</th>
                   <th className="px-4 py-3 text-right text-xs font-semibold uppercase tracking-wide text-muted">Assignment</th>
+                  <th className="px-4 py-3 text-right text-xs font-semibold uppercase tracking-wide text-muted">Price</th>
                   <th className="px-4 py-3 text-right text-xs font-semibold uppercase tracking-wide text-muted">Status</th>
                   <th className="px-4 py-3 text-right text-xs font-semibold uppercase tracking-wide text-muted">Date</th>
                   <th className="px-4 py-3" />
@@ -145,6 +148,9 @@ export function CustomOrdersTable({
                         assignedVariant={o.assignedVariant}
                         stockOptions={stockOptions}
                       />
+                    </td>
+                    <td className="px-4 py-3 text-right">
+                      <PriceEditor id={o.id} totalPrice={o.totalPrice} />
                     </td>
                     <td className="px-4 py-3 text-right">
                       <StatusSelect id={o.id} status={o.status} />

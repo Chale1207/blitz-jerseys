@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { MessageCircle } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { formatWhatsAppDisplay } from "@/lib/whatsapp";
+import { formatPrice } from "@/lib/format";
 import {
   CUSTOM_ORDER_STATUS_LABELS,
   CUSTOM_ORDER_STATUS_MESSAGES,
@@ -90,6 +91,14 @@ export default async function TrackCustomOrderPage({
               <dd className="font-medium text-brand-700">
                 {order.assignedVariant.product.team.name}{" "}
                 {order.assignedVariant.product.name} ({order.assignedVariant.size})
+              </dd>
+            </div>
+          ) : null}
+          {order.totalPrice != null ? (
+            <div className="flex justify-between border-t border-border pt-3 text-sm">
+              <dt className="font-semibold text-ink-900">Total Cost</dt>
+              <dd className="font-head text-base font-bold text-brand-600">
+                {formatPrice(order.totalPrice)}
               </dd>
             </div>
           ) : null}
