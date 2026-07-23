@@ -6,8 +6,6 @@ import { useCartStore } from "@/lib/cart-store";
 
 type Variant = { id: string; size: string; stock: number };
 
-const SIZE_ORDER = ["S", "M", "L", "XL", "XXL"];
-
 function isLongSleeve(size: string) {
   return size.endsWith("-LS");
 }
@@ -41,7 +39,7 @@ export function AddToCart({
 }) {
   const shortVariants = variants.filter((v) => !isLongSleeve(v.size));
   const longVariants = variants.filter((v) => isLongSleeve(v.size));
-  const hasLongSleeve = longVariants.length > 0;
+  const hasLongSleeve = longVariants.some((v) => v.stock > 0);
 
   const [sleeve, setSleeve] = useState<"short" | "long">("short");
   const activeVariants = sleeve === "long" ? longVariants : shortVariants;

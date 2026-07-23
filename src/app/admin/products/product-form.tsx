@@ -8,7 +8,8 @@ type Team = { id: string; name: string; league: { name: string } };
 type Variant = { size: string; stock: number };
 
 const KIT_TYPES = ["Home Kit", "Away Kit", "Third Kit", "Training Kit", "Goalkeeper Kit"];
-const DEFAULT_SIZES = ["S", "M", "L", "XL", "XXL", "S-LS", "M-LS", "L-LS", "XL-LS", "XXL-LS"];
+const DEFAULT_SIZES = ["XS", "S", "M", "L", "XL", "XXL"];
+const LONG_SLEEVE_SIZES = ["XS-LS", "S-LS", "M-LS", "L-LS", "XL-LS", "XXL-LS"];
 
 export function ProductForm({
   teams,
@@ -42,6 +43,14 @@ export function ProductForm({
 
   function addVariant() {
     setVariants((v) => [...v, { size: "", stock: 10 }]);
+  }
+
+  function addLongSleeveSizes() {
+    setVariants((v) => {
+      const existingSizes = new Set(v.map((row) => row.size));
+      const missing = LONG_SLEEVE_SIZES.filter((size) => !existingSizes.has(size));
+      return [...v, ...missing.map((size) => ({ size, stock: 0 }))];
+    });
   }
 
   function removeVariant(i: number) {
@@ -206,14 +215,28 @@ export function ProductForm({
             </tbody>
           </table>
         </div>
-        <button
-          type="button"
-          onClick={addVariant}
-          className="mt-2 flex items-center gap-1.5 text-xs font-semibold text-brand-600 hover:text-brand-700"
-        >
-          <Plus className="h-3.5 w-3.5" />
-          Add size
-        </button>
+        <div className="mt-2 flex flex-wrap gap-4">
+          <button
+            type="button"
+            onClick={addVariant}
+            className="flex items-center gap-1.5 text-xs font-semibold text-brand-600 hover:text-brand-700"
+          >
+            <Plus className="h-3.5 w-3.5" />
+            Add size
+          </button>
+          <button
+            type="button"
+            onClick={addLongSleeveSizes}
+            className="flex items-center gap-1.5 text-xs font-semibold text-brand-600 hover:text-brand-700"
+          >
+            <Plus className="h-3.5 w-3.5" />
+            Add long sleeve sizes
+          </button>
+        </div>
+        <p className="mt-1.5 text-xs text-muted">
+          Long sleeve sizes appear as a separate option on the product page only once
+          you set their stock above 0. Leave a size at 0 to keep it hidden from customers.
+        </p>
       </div>
 
       <div className="flex gap-3 pt-2">
