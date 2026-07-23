@@ -24,9 +24,10 @@ jobs:
         with:
           java-version: "17"
           distribution: "temurin"
+          cache: gradle
 
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
+      - name: Grant gradlew execute permission
+        run: chmod +x android/gradlew
 
       - name: Decode keystore
         run: |
@@ -39,6 +40,7 @@ jobs:
             -PversionName="${{ github.event.inputs.version_name }}" \
             -PversionCode="${{ github.event.inputs.version_code }}"
         env:
+          ANDROID_HOME: ${{ env.ANDROID_SDK_ROOT }}
           KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
           KEY_ALIAS: blitzjerseys
           KEY_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
