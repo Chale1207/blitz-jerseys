@@ -54,3 +54,4 @@ prisma/*.db-journal
 android/*.keystore
 
 android/local.properties
+android/keystore.b64.txt

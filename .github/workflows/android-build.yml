@@ -1,0 +1,51 @@
+name: Android Build
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_name:
+        description: "Version name (e.g. 1.0.1)"
+        required: true
+        default: "1.0.0"
+      version_code:
+        description: "Version code (integer, increment each release)"
+        required: true
+        default: "1"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: "17"
+          distribution: "temurin"
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Decode keystore
+        run: |
+          echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 --decode > android/blitz-jerseys.keystore
+
+      - name: Build release AAB
+        working-directory: android
+        run: |
+          ./gradlew bundleRelease \
+            -PversionName="${{ github.event.inputs.version_name }}" \
+            -PversionCode="${{ github.event.inputs.version_code }}"
+        env:
+          KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          KEY_ALIAS: blitzjerseys
+          KEY_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+
+      - name: Upload AAB artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: blitz-jerseys-${{ github.event.inputs.version_name }}.aab
+          path: android/app/build/outputs/bundle/release/app-release.aab
+          retention-days: 30
