@@ -53,6 +53,33 @@ export function buildOrderWhatsAppLink(params: {
   return `https://wa.me/${number}?text=${text}`;
 }
 
+export function buildPreOrderWhatsAppLink(params: {
+  orderNumber: string;
+  customerName: string;
+  kitName: string;
+  size: string;
+  sleeveType: string;
+  quantity: number;
+  notes?: string;
+}): string {
+  const number = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "";
+  const sleeve = params.sleeveType === "long" ? "Long Sleeve" : "Short Sleeve";
+  const lines = [
+    `Hi Blitz Jerseys! I'd like to pre-order a jersey.`,
+    ``,
+    `Reference: ${params.orderNumber}`,
+    `Name: ${params.customerName}`,
+    `Kit: ${params.kitName}`,
+    `Size: ${params.size} (${sleeve})`,
+    `Quantity: ${params.quantity}`,
+    ...(params.notes ? [`Notes: ${params.notes}`] : []),
+    ``,
+    `Please confirm availability and deposit required. Thank you!`,
+  ];
+  const text = encodeURIComponent(lines.join("\n"));
+  return `https://wa.me/${number}?text=${text}`;
+}
+
 export function buildCustomOrderWhatsAppLink(params: {
   customerName: string;
   whatsapp: string;

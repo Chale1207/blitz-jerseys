@@ -114,6 +114,33 @@ export default function CustomOrderPage() {
           />
         </div>
 
+        <div>
+          <p className="text-sm font-semibold text-ink-900">Sleeve</p>
+          <div className="mt-1.5 flex gap-2">
+            {(["Short Sleeve", "Long Sleeve"] as const).map((s) => {
+              const isLong = form.size.endsWith(" (Long Sleeve)");
+              const active = s === "Long Sleeve" ? isLong : !isLong;
+              return (
+                <button
+                  key={s}
+                  type="button"
+                  onClick={() => {
+                    const base = form.size.replace(" (Long Sleeve)", "");
+                    setForm({ ...form, size: s === "Long Sleeve" ? `${base} (Long Sleeve)` : base });
+                  }}
+                  className={`flex-1 rounded-lg border py-2.5 text-sm font-semibold transition-colors ${
+                    active
+                      ? "border-brand-500 bg-brand-500 text-white"
+                      : "border-border text-ink-900 hover:border-brand-400"
+                  }`}
+                >
+                  {s}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
         <div className="grid gap-5 sm:grid-cols-2">
           <div>
             <label htmlFor="size" className="text-sm font-semibold text-ink-900">
@@ -123,8 +150,11 @@ export default function CustomOrderPage() {
               id="size"
               required
               placeholder="e.g. M, XL, Kids 26"
-              value={form.size}
-              onChange={(e) => setForm({ ...form, size: e.target.value })}
+              value={form.size.replace(" (Long Sleeve)", "")}
+              onChange={(e) => {
+                const isLong = form.size.endsWith(" (Long Sleeve)");
+                setForm({ ...form, size: isLong ? `${e.target.value} (Long Sleeve)` : e.target.value });
+              }}
               className="mt-1.5 w-full rounded-lg border border-border px-4 py-3 text-sm outline-none focus:border-brand-500"
             />
           </div>

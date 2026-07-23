@@ -38,8 +38,10 @@ export default async function ProductPage({
   if (!product) notFound();
 
   const sortedVariants = [...product.variants].sort((a, b) => {
-    const order = ["S", "M", "L", "XL", "XXL"];
-    return order.indexOf(a.size) - order.indexOf(b.size);
+    const order = ["S", "M", "L", "XL", "XXL", "S-LS", "M-LS", "L-LS", "XL-LS", "XXL-LS"];
+    const ai = order.indexOf(a.size);
+    const bi = order.indexOf(b.size);
+    return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
   });
 
   const dotColor = isLightColor(product.team.primaryColor)

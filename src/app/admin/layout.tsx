@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, ShoppingBag, ClipboardList, Wand2, LogOut, Menu, X } from "lucide-react";
+import { LayoutDashboard, ShoppingBag, ClipboardList, Wand2, Clock, LogOut, Menu, X } from "lucide-react";
 import { Toaster } from "sonner";
 import { logoutAction } from "./login/actions";
 
@@ -12,6 +12,7 @@ const NAV = [
   { href: "/admin/products", label: "Products", icon: ShoppingBag },
   { href: "/admin/orders", label: "Orders", icon: ClipboardList },
   { href: "/admin/custom-orders", label: "Custom Orders", icon: Wand2 },
+  { href: "/admin/pre-orders", label: "Pre-orders", icon: Clock },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {

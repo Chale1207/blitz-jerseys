@@ -94,6 +94,21 @@ model LoginAttempt {
   lastFailAt  DateTime @default(now())
 }
 
+model PreOrder {
+  id          String   @id @default(cuid())
+  orderNumber String   @unique
+  customerName String
+  whatsapp    String
+  kitId       String
+  kitName     String
+  size        String
+  sleeveType  String   @default("short")
+  quantity    Int      @default(1)
+  status      String   @default("pending")
+  notes       String?
+  createdAt   DateTime @default(now())
+}
+
 model CustomOrder {
   id                String          @id @default(cuid())
   orderNumber       String          @unique

@@ -8,7 +8,7 @@ type Team = { id: string; name: string; league: { name: string } };
 type Variant = { size: string; stock: number };
 
 const KIT_TYPES = ["Home Kit", "Away Kit", "Third Kit", "Training Kit", "Goalkeeper Kit"];
-const DEFAULT_SIZES = ["S", "M", "L", "XL", "XXL"];
+const DEFAULT_SIZES = ["S", "M", "L", "XL", "XXL", "S-LS", "M-LS", "L-LS", "XL-LS", "XXL-LS"];
 
 export function ProductForm({
   teams,

@@ -32,6 +32,12 @@ export async function Navbar() {
           >
             Promotions
           </Link>
+          <Link
+            href="/pre-orders"
+            className="text-sm font-semibold uppercase tracking-wide text-amber-600 transition-colors hover:text-amber-500"
+          >
+            Pre-orders
+          </Link>
           {leagues.map((league) => (
             <Link
               key={league.slug}
