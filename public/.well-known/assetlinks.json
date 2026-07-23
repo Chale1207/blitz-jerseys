@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.blitzjerseys.app",
+      "sha256_cert_fingerprints": [
+        "FC:DB:E9:99:C9:25:5E:49:63:DB:1B:AF:89:E6:86:F1:AB:AE:47:8D:9C:3E:A9:86:9F:16:AD:E1:B3:BE:B9:DE"
+      ]
+    }
+  }
+]

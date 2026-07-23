@@ -49,3 +49,6 @@ prisma/*.db-journal
 
 .vercel
 .env*
+
+# Android signing keystore - never commit
+android/*.keystore
