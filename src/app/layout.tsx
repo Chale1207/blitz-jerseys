@@ -30,6 +30,12 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: { default: title, template: "%s | Blitz Jerseys" },
   description,
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "Blitz Jerseys",
+  },
   keywords: [
     "Blitz Jerseys",
     "blitzjerseys",
