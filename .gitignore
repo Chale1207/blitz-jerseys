@@ -52,3 +52,5 @@ prisma/*.db-journal
 
 # Android signing keystore - never commit
 android/*.keystore
+
+android/local.properties

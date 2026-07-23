@@ -10,9 +10,15 @@ const KEYTOOL = path.join(JDK_BIN, "keytool.exe");
 
 const KEYSTORE = path.join(__dirname, "..", "android", "blitz-jerseys.keystore");
 const ALIAS = "blitzjerseys";
-// Keep this password; you'll need it for Gradle signing config.
-const STORE_PASS = "blitzjerseys2026";
-const KEY_PASS = "blitzjerseys2026";
+// Read password from env or local.properties. Never hardcode here.
+const STORE_PASS = process.env.KEYSTORE_PASSWORD;
+const KEY_PASS = process.env.KEYSTORE_PASSWORD;
+if (!STORE_PASS) {
+  console.error(
+    "Set KEYSTORE_PASSWORD env var before running:\n  $env:KEYSTORE_PASSWORD='yourpassword'; node scripts/twa-keygen.js"
+  );
+  process.exit(1);
+}
 const DNAME =
   "CN=Blitz Jerseys, OU=Mobile, O=Blitz Jerseys, L=Lusaka, ST=Lusaka, C=ZM";
 

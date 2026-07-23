@@ -53,12 +53,19 @@ def twaManifest = [
 android {
     compileSdkVersion 36
     namespace "com.blitzjerseys.app"
+    // Signing credentials live in android/local.properties (gitignored).
+    // Copy android/local.properties.example to local.properties and fill in values.
+    def keystoreProps = new Properties()
+    def keystorePropsFile = rootProject.file('local.properties')
+    if (keystorePropsFile.exists()) {
+        keystoreProps.load(new FileInputStream(keystorePropsFile))
+    }
     signingConfigs {
         release {
-            storeFile file('../blitz-jerseys.keystore')
-            storePassword 'blitzjerseys2026'
-            keyAlias 'blitzjerseys'
-            keyPassword 'blitzjerseys2026'
+            storeFile file(keystoreProps['storeFile'] ?: '../blitz-jerseys.keystore')
+            storePassword keystoreProps['storePassword'] ?: ''
+            keyAlias keystoreProps['keyAlias'] ?: 'blitzjerseys'
+            keyPassword keystoreProps['keyPassword'] ?: ''
         }
     }
     defaultConfig {
