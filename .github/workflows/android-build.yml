@@ -33,10 +33,10 @@ jobs:
         run: |
           echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 --decode > android/blitz-jerseys.keystore
 
-      - name: Build release AAB
+      - name: Build release APK
         working-directory: android
         run: |
-          ./gradlew bundleRelease \
+          ./gradlew assembleRelease \
             -PversionName="${{ github.event.inputs.version_name }}" \
             -PversionCode="${{ github.event.inputs.version_code }}"
         env:
@@ -45,9 +45,9 @@ jobs:
           KEY_ALIAS: blitzjerseys
           KEY_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
 
-      - name: Upload AAB artifact
+      - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: blitz-jerseys-${{ github.event.inputs.version_name }}.aab
-          path: android/app/build/outputs/bundle/release/app-release.aab
+          name: blitz-jerseys-${{ github.event.inputs.version_name }}.apk
+          path: android/app/build/outputs/apk/release/app-release.apk
           retention-days: 30
