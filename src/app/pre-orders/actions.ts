@@ -19,7 +19,7 @@ export async function submitPreOrder(params: {
   quantity: number;
   notes?: string;
 }): Promise<{ success: true; orderNumber: string } | { success: false; error: string }> {
-  const kit = getPreOrderKit(params.kitId);
+  const kit = await getPreOrderKit(params.kitId);
   if (!kit) return { success: false, error: "Invalid kit selection." };
   if (kit.status === "notify") return { success: false, error: "This kit is not yet available for pre-order." };
   if (!params.customerName.trim()) return { success: false, error: "Name is required." };
@@ -51,7 +51,7 @@ export async function submitNotifyMe(params: {
   whatsapp: string;
   kitId: string;
 }): Promise<{ success: true } | { success: false; error: string }> {
-  const kit = getPreOrderKit(params.kitId);
+  const kit = await getPreOrderKit(params.kitId);
   if (!kit) return { success: false, error: "Invalid kit selection." };
   if (!params.customerName.trim()) return { success: false, error: "Name is required." };
   if (!params.whatsapp.trim()) return { success: false, error: "WhatsApp number is required." };

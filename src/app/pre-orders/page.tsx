@@ -1,6 +1,8 @@
 import { Metadata } from "next";
 import { PreOrdersClient } from "./pre-orders-client";
-import { PRE_ORDER_KITS } from "@/lib/pre-order-kits";
+import { getAllPreOrderKits } from "@/lib/pre-order-kits";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Pre-orders — 2026/27 Away Kits",
@@ -8,7 +10,8 @@ export const metadata: Metadata = {
     "Secure your 2026/27 away kit before it arrives. Limited pre-order slots for Chelsea, Barcelona, Man United, and Real Madrid.",
 };
 
-export default function PreOrdersPage() {
+export default async function PreOrdersPage() {
+  const kits = await getAllPreOrderKits();
   return (
     <div className="container-page py-10">
       <div className="mb-10 max-w-2xl">
@@ -23,7 +26,7 @@ export default function PreOrdersPage() {
           contact you the moment your kit is in — no payment until it lands.
         </p>
       </div>
-      <PreOrdersClient kits={PRE_ORDER_KITS} />
+      <PreOrdersClient kits={kits} />
     </div>
   );
 }

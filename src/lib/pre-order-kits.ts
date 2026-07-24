@@ -1,3 +1,7 @@
+import { prisma } from "@/lib/prisma";
+
+export type PreOrderKitStatus = "open" | "coming-soon" | "notify";
+
 export type PreOrderKit = {
   id: string;
   club: string;
@@ -6,57 +10,40 @@ export type PreOrderKit = {
   images: string[];
   defaultImageIndex: number;
   price: number;
-  status: "open" | "coming-soon" | "notify";
+  status: PreOrderKitStatus;
   demandPercent: number;
 };
 
-export const PRE_ORDER_KITS: PreOrderKit[] = [
-  {
-    id: "chelsea-away-2627",
-    club: "Chelsea FC",
-    kitName: "2026/27 Away Kit",
-    fullName: "Chelsea FC 2026/27 Away Kit",
-    images: ["/images/pre-orders/chelsea-away-1-v2.jpg", "/images/pre-orders/chelsea-away-2-v2.jpg"],
-    defaultImageIndex: 0,
-    price: 850,
-    status: "open",
-    demandPercent: 73,
-  },
-  {
-    id: "man-utd-away-2627",
-    club: "Manchester United",
-    kitName: "2026/27 Away Kit",
-    fullName: "Manchester United 2026/27 Away Kit",
-    images: ["/images/pre-orders/man-utd-away-1-v2.jpg", "/images/pre-orders/man-utd-away-2-v2.jpg"],
-    defaultImageIndex: 1,
-    price: 850,
-    status: "open",
-    demandPercent: 41,
-  },
-  {
-    id: "real-madrid-away-2627",
-    club: "Real Madrid",
-    kitName: "2026/27 Away Kit",
-    fullName: "Real Madrid 2026/27 Away Kit",
-    images: ["/images/pre-orders/real-madrid-away-1-v2.jpg", "/images/pre-orders/real-madrid-away-2-v2.jpg"],
-    defaultImageIndex: 0,
-    price: 850,
-    status: "open",
-    demandPercent: 29,
-  },
-  {
-    id: "barcelona-away-2627",
-    club: "FC Barcelona",
-    kitName: "2026/27 Away Kit",
-    fullName: "FC Barcelona 2026/27 Away Kit",
-    images: ["/images/pre-orders/barcelona-away-1-v2.jpg", "/images/pre-orders/barcelona-away-2-v2.jpg"],
-    defaultImageIndex: 0,
-    price: 850,
-    status: "notify",
-    demandPercent: 0,
-  },
-];
+function parseKit(row: {
+  id: string;
+  club: string;
+  kitName: string;
+  fullName: string;
+  imagesJson: string;
+  defaultImageIndex: number;
+  price: number;
+  status: string;
+  demandPercent: number;
+}): PreOrderKit {
+  return {
+    id: row.id,
+    club: row.club,
+    kitName: row.kitName,
+    fullName: row.fullName,
+    images: JSON.parse(row.imagesJson) as string[],
+    defaultImageIndex: row.defaultImageIndex,
+    price: row.price,
+    status: row.status as PreOrderKitStatus,
+    demandPercent: row.demandPercent,
+  };
+}
 
-export function getPreOrderKit(id: string): PreOrderKit | undefined {
-  return PRE_ORDER_KITS.find((k) => k.id === id);
+export async function getAllPreOrderKits(): Promise<PreOrderKit[]> {
+  const rows = await prisma.preOrderKit.findMany({ orderBy: { createdAt: "asc" } });
+  return rows.map(parseKit);
+}
+
+export async function getPreOrderKit(id: string): Promise<PreOrderKit | undefined> {
+  const row = await prisma.preOrderKit.findUnique({ where: { id } });
+  return row ? parseKit(row) : undefined;
 }

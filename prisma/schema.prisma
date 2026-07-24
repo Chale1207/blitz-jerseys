@@ -94,6 +94,19 @@ model LoginAttempt {
   lastFailAt  DateTime @default(now())
 }
 
+model PreOrderKit {
+  id                String   @id @default(cuid())
+  club              String
+  kitName           String
+  fullName          String
+  imagesJson        String
+  defaultImageIndex Int      @default(0)
+  price             Int
+  status            String   @default("open")
+  demandPercent     Int      @default(0)
+  createdAt         DateTime @default(now())
+}
+
 model PreOrder {
   id          String   @id @default(cuid())
   orderNumber String   @unique
