@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Plus, Trash2 } from "lucide-react";
 import { ImageUploader } from "@/components/admin/image-uploader";
 
@@ -14,10 +15,12 @@ const LONG_SLEEVE_SIZES = ["XS-LS", "S-LS", "M-LS", "L-LS", "XL-LS", "XXL-LS"];
 export function ProductForm({
   teams,
   action,
+  productId,
   defaultValues,
 }: {
   teams: Team[];
-  action: (formData: FormData) => Promise<void>;
+  action?: (formData: FormData) => Promise<void>;
+  productId?: string;
   defaultValues?: {
     teamId?: string;
     name?: string;
@@ -31,6 +34,7 @@ export function ProductForm({
     variants?: Variant[];
   };
 }) {
+  const router = useRouter();
   const [variants, setVariants] = useState<Variant[]>(
     defaultValues?.variants ?? DEFAULT_SIZES.map((size) => ({ size, stock: 10 }))
   );
@@ -40,6 +44,34 @@ export function ProductForm({
       ? defaultValues.imageUrls.split("\n").map((u) => u.trim()).filter(Boolean)
       : []
   );
+
+  const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
+
+  async function handleEditSubmit(e: React.FormEvent<HTMLFormElement>) {
+    if (!productId) return; // create mode uses the Server Action normally
+    e.preventDefault();
+    setSaveError(null);
+    setSaving(true);
+    try {
+      const formData = new FormData(e.currentTarget);
+      const res = await fetch(`/api/admin/products/${productId}`, {
+        method: "POST",
+        body: formData,
+      });
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        setSaveError(data.error ?? "Failed to save changes.");
+        return;
+      }
+      router.push("/admin/products");
+      router.refresh();
+    } catch {
+      setSaveError("Failed to save changes. Check your connection and try again.");
+    } finally {
+      setSaving(false);
+    }
+  }
 
   function addVariant() {
     setVariants((v) => [...v, { size: "", stock: 10 }]);
@@ -66,7 +98,14 @@ export function ProductForm({
   }
 
   return (
-    <form action={action} className="space-y-6">
+    <form
+      action={productId ? undefined : action}
+      onSubmit={productId ? handleEditSubmit : undefined}
+      className="space-y-6"
+    >
+      {saveError ? (
+        <p className="rounded-lg bg-red-50 px-4 py-3 text-sm text-red-700">{saveError}</p>
+      ) : null}
       {/* Team + basic info */}
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
@@ -242,9 +281,10 @@ export function ProductForm({
       <div className="flex gap-3 pt-2">
         <button
           type="submit"
-          className="rounded-xl bg-brand-500 px-6 py-2.5 text-sm font-bold uppercase tracking-wide text-white hover:bg-brand-600 active:scale-95"
+          disabled={saving}
+          className="rounded-xl bg-brand-500 px-6 py-2.5 text-sm font-bold uppercase tracking-wide text-white hover:bg-brand-600 active:scale-95 disabled:opacity-50"
         >
-          Save kit
+          {saving ? "Saving…" : "Save kit"}
         </button>
         <a
           href="/admin/products"
